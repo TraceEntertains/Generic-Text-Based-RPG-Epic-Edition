@@ -38,6 +38,9 @@ namespace Text_Based_Game
             int skeleArchPower = rand.Next(3, 5);
             int skeleArchHealth = rand.Next(7, 10);
             Combat(false, "Skeleton Archer", skeleArchPower, skeleArchHealth);
+            int skeleArchlootCoins = rand.Next(30, 70);
+            currentPlayer.coins += skeleArchlootCoins;
+
         }
         public static void SlimeEncounter()
         {
@@ -47,17 +50,20 @@ namespace Text_Based_Game
             int slimeHealth = rand.Next(5, 10);
             int kingSlimePower = rand.Next(20, 50);
             int kingSlimeHealth = rand.Next(50, 100);
+            
 
             if (slimeRNG.Next(0,21) == 1)
             {
                 WriteLine("Loud thuds pounce towards your wake. Fear trembles down your spine. Then you spot it! \n KING SLIME HAS APPEARED!");
                 ReadKey();
                 Combat(false, "King Slime", kingSlimePower, kingSlimeHealth);
+                int kingSlimeCoins = rand.Next(100, 150);
+                currentPlayer.coins += kingSlimeCoins;
             }
 
             else
             {
-                WriteLine("You spot a slime in the distance.");
+                WriteLine("You spot a blue little blob in the distance that is hastly approaching!.");
                 ReadKey();
                 Combat(false, "Slime", slimePower, slimeHealth);
             }
