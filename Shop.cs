@@ -15,7 +15,7 @@ namespace Text_Based_Game
         public static void RunShop(Player player)
         {
             int potionPlayer = 20 + 10 * diffMod;
-            int armorPlayer = 100 * armorMod;
+            int armorPlayer = 100 * (armorMod + 1);
             int weaponPlayer = 100 * (weaponMod + 1);
             int diffPlayer = 300 + 100 * player.mods;
 

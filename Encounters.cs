@@ -187,10 +187,10 @@ namespace Text_Based_Game
                     System.Environment.Exit(0);
                 }
             }
-            int coins = (int)Math.Pow(currentPlayer.level * coinExponential, 1.5) * rand.Next(10, 50);
+            int lootCoins = (int)Math.Pow(currentPlayer.level * coinExponential, 1.5) * rand.Next(10, 50);
             // Add A Slime Sword Later!
-            WriteLine("\nAs you stand victorious over the " + name + ", it's body dissolves into " + coins + " gold coins!");
-            currentPlayer.coins += coins;
+            WriteLine("\nAs you stand victorious over the " + name + ", it's body dissolves into " + lootCoins + " gold coins!");
+            currentPlayer.coins += lootCoins;
             ReadKey();
         }
 
