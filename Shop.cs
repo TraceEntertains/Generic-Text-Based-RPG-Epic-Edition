@@ -93,17 +93,21 @@ namespace Text_Based_Game
                 WriteLine("    Player Stats     ");
                 WriteLine("=====================");
                 WriteLine("Current Health: " + player.health);
+                WriteLine("Coins: " + player.coins);
                 WriteLine("Weapon Strength: " + player.weaponValue);
                 WriteLine("Armor Defense: " + player.armorValue);
                 WriteLine("Potions: " + player.potion);
                 WriteLine("Difficulty Mods: " + player.mods);
                 WriteLine("=====================");
+                WriteLine("(B)ack");
                 WriteLine("(E)xit");
                 WriteLine("=====================");
 
                 string input = ReadKey(true).Key.ToString().ToLower();
-                if (input == "e")
+                if (input == "b")
                     RunShop(player);
+                else if (input == "e")
+                    Encounters.RandomEncounter();
             }
         }
     }
