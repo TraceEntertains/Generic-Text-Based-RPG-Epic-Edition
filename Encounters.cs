@@ -106,11 +106,11 @@ namespace Text_Based_Game
                 Console.WriteLine("|   (R)un   (H)eal  |");
                 Console.WriteLine("=====================");
                 Console.WriteLine("Potions:  " + Program.currentPlayer.potion + "  Health:  " + Program.currentPlayer.health);
-                string input = Console.ReadLine();
+                string input = Console.ReadKey(true).Key.ToString();
                 if (input.ToLower() == "a" || input.ToLower() == "attack")
                 {
                     // Attack
-                    Console.WriteLine("You run foward swinging hoping to hit something! As you pass, the " + n + " strikes you back!");
+                    Console.WriteLine("\nYou run foward swinging hoping to hit something! As you pass, the " + n + " strikes you back!");
                     int damage = p - Program.currentPlayer.armorValue;
                     if (damage < 0)
                         damage = 0;
@@ -118,7 +118,7 @@ namespace Text_Based_Game
                     Console.WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     Program.currentPlayer.health -= damage;
                     h -= attack;
-                    Console.ReadKey();
+                    _ = Console.ReadKey(true).Key.ToString();
                 }
 
                 else if (input.ToLower() == "d" || input.ToLower() == "defend")
@@ -133,7 +133,7 @@ namespace Text_Based_Game
                     Console.WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     Program.currentPlayer.health -= damage;
                     h -= attack;
-                    Console.ReadKey();
+                    _ = Console.ReadKey(true).Key.ToString();
                 }
                 else if (input.ToLower() == "r" || input.ToLower() == "run")
                 {
@@ -145,13 +145,14 @@ namespace Text_Based_Game
                         if (damage < 0)
                             damage = 0;
                         Console.WriteLine("You lose " + damage + " health and are unable to escape.");
-                        Console.ReadKey();
+                        _ = Console.ReadKey(true).Key.ToString();
                     }
                     else
                     {
                             Console.WriteLine("You use your crazy mobility to evade the attacks of " + n + " and you fully escape");
-                            Console.ReadKey();
-                            // Go to store
+                        _ = Console.ReadKey(true).Key.ToString();
+                        Shop.LoadShop(Program.currentPlayer);
+
                     }
                 }
                 else if (input.ToLower() == "h" || input.ToLower() == "heal")
@@ -178,7 +179,8 @@ namespace Text_Based_Game
                         Console.WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
                         Program.currentPlayer.potion--; 
                     }
-                    Console.ReadKey();
+
+                    _ = Console.ReadKey(true).Key.ToString();
                 }
                 if (Program.currentPlayer.health <= 0)
                 {
