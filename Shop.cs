@@ -12,10 +12,6 @@ namespace Text_Based_Game
         static int armorMod;
         static int weaponMod;
         static int diffMod;
-        public static void LoadShop(Player player)
-        {
-            RunShop(player);
-        }
         public static void RunShop(Player player)
         {
             int potionPlayer = 20 + 10 * diffMod;
@@ -26,44 +22,40 @@ namespace Text_Based_Game
             while (true)
             {
                 Clear();
+                WriteLine("=====================");
                 WriteLine("         Shop        ");
                 WriteLine("=====================");
-                WriteLine("(W)eapon:          $" + weaponPlayer); ;
+                WriteLine("(W)eapon:          $" + weaponPlayer);
                 WriteLine("(A)rmor            $" + armorPlayer);
-                WriteLine("(P)otions:          $" + potionPlayer);
+                WriteLine("(P)otions:         $" + potionPlayer);
                 WriteLine("(D)ifficulty Mod:  $" + diffPlayer);
-                WriteLine("=====================\n");
-                WriteLine("(E)xit");
-
-
-                WriteLine("\n    Player Stats     ");
+                WriteLine("(S)tats");
                 WriteLine("=====================");
-                WriteLine("Current Health: " + player.health);
-                WriteLine("Coins: " + player.coins);
-                WriteLine("Weapon Stregenth: " + player.weaponValue);
-                WriteLine("Armor Defense: " + player.armorValue);
-                WriteLine("Potions: " + player.potion);
-                WriteLine("Difficulty Mods: " + player.mods);
+                WriteLine("(E)xit");
                 WriteLine("=====================");
 
                 string input = ReadKey(true).Key.ToString().ToLower();
-                if (input == "p" || input == "potion")
+                if (input == "p")
                 {
                     TryBuy("potion", potionPlayer, player);
                 }
-                else if (input == "w" || input == "weapon")
+                else if (input == "w")
                 {
                     TryBuy("weapon", weaponPlayer, player);
                 }
-                else if (input == "a" || input == "armor")
+                else if (input == "a")
                 {
                     TryBuy("armor", armorPlayer, player);
                 }
-                else if (input == "d" || input == "difficulty mod")
+                else if (input == "d")
                 {
                     TryBuy("diff", diffPlayer, player);
                 }
-                else if (input == "e" || input == "exit")
+                else if (input == "s")
+                {
+                    StatsScreen(player);
+                }
+                else if (input == "e")
                     break;
 
             }
@@ -82,12 +74,35 @@ namespace Text_Based_Game
                     player.mods++;
 
                 player.coins -= cost;
-
             }
             else
             {
                 WriteLine("You don't have enough coins.");
                 ReadKey();
+            }
+        }
+
+        static void StatsScreen(Player player)
+        {
+            while (true)
+            {
+                Clear();
+                WriteLine("=====================");
+                WriteLine("    Player Stats     ");
+                WriteLine("=====================");
+                WriteLine("Current Health: " + player.health);
+                WriteLine("Coins: " + player.coins);
+                WriteLine("Weapon Strength: " + player.weaponValue);
+                WriteLine("Armor Defense: " + player.armorValue);
+                WriteLine("Potions: " + player.potion);
+                WriteLine("Difficulty Mods: " + player.mods);
+                WriteLine("=====================");
+                WriteLine("(E)xit");
+                WriteLine("=====================");
+
+                string input = ReadKey(true).Key.ToString().ToLower();
+                if (input == "e")
+                    RunShop(player);
             }
         }
     }

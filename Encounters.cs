@@ -105,7 +105,7 @@ namespace Text_Based_Game
                 {
                     // Attack
                     WriteLine("");
-                    WriteLine("You run foward swinging hoping to hit something! As you pass, the " + name + " strikes you back!");
+                    WriteLine("You run forward swinging hoping to hit something! As you pass, the " + name + " strikes you back!");
                     int damage = power - currentPlayer.armorValue;
                     if (damage < 0)
                         damage = 0;
@@ -116,7 +116,7 @@ namespace Text_Based_Game
                     ReadKey();
                 }
 
-                else if (input == "d" || input == "defend")
+                else if (input == "d")
                 {
                     // Defend
                     WriteLine("");
@@ -131,13 +131,13 @@ namespace Text_Based_Game
                     health -= attack;
                     ReadKey();
                 }
-                else if (input == "r" || input == "run")
+                else if (input == "r")
                 {
                     // Run
                     WriteLine("");
                     if (rand.Next(0, 2) == 0)
                     { 
-                        WriteLine("As you sprint away from the " + name + "'s strike catches you in the back, sending you sprawling onto the ground");
+                        WriteLine("As you sprint away from the " + name + ", its strike catches you in the back, sending you sprawling onto the ground!");
                         int damage = power - currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
@@ -146,18 +146,18 @@ namespace Text_Based_Game
                     }
                     else
                     {
-                            WriteLine("You use your crazy mobility to evade the attacks of " + name + " and you fully escape");
+                            WriteLine("You use your crazy mobility to evade the attacks of " + name + " and you escape!");
                             ReadKey();
-                            Shop.LoadShop(Program.currentPlayer);
+                            Shop.RunShop(currentPlayer);
                     }
                 }
-                else if (input == "h" || input == "heal")
+                else if (input == "h")
                 {
                     // Heal
                     WriteLine("");
                     if (currentPlayer.potion == 0)
                     {
-                        WriteLine("As you desperatly grasp for a potion in your bag, all that you can find is empty glass flask");
+                        WriteLine("As you desperately grasp for a potion in your bag, all that you can find is empty glass flasks!");
                         int damage = power - currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
@@ -184,7 +184,6 @@ namespace Text_Based_Game
                     ReadKey();
                     System.Environment.Exit(0);
                 }
-       
             }
             int coins = (int)Math.Pow(currentPlayer.level * coinExponential, 1.5) * rand.Next(10, 50);
             // Add A Slime Sword Later!

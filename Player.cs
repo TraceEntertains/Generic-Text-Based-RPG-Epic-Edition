@@ -29,7 +29,7 @@ namespace Text_Based_Game
         {
             int upper = (2 * mods + 5);
             int lower = (mods + 2);
-            return rand.Next(lower,upper); 
+            return rand.Next(lower, upper); 
         }
         public int GetPower()
         {

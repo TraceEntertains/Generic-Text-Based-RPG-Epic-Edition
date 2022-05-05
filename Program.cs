@@ -18,7 +18,6 @@ namespace Text_Based_Game
             {
                 Encounters.RandomEncounter();
             }
-
         }
         
         static void Start()
@@ -30,7 +29,7 @@ namespace Text_Based_Game
             Console.WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
             if(currentPlayer.name == "")
                 Console.WriteLine("You can't even remember your own name...");
-                else 
+            else 
                 Console.WriteLine("You remember that your name is " + currentPlayer.name + ".");
             Console.WriteLine("(Press any key to continue)");
             Console.ReadKey();
