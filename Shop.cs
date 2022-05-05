@@ -61,7 +61,7 @@ namespace Text_Based_Game
             }
             else
             {
-                Console.WriteLine"You don't have enough coins.";
+                Console.WriteLine("You don't have enough coins.");
                 Console.ReadKey();
             }
         }
