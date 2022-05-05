@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Text_Based_Game
 {
     internal class Program
     {
         public static Player currentPlayer = new Player();
+        public static string appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        public static string appDataFolderName = "\\GTBRPGEE";
+        public static string fullPath;
         public static bool mainLoop = true;
         static void Main(string[] args)
         {
@@ -26,6 +30,9 @@ namespace Text_Based_Game
 
         static void Start()
         {
+            if (Directory.Exists(appDataDirectory + appDataFolderName) == false)
+                Directory.CreateDirectory(appDataDirectory + appDataFolderName);
+            fullPath = appDataDirectory + appDataFolderName;
             Clear();
             WriteLine("Generic Text Based RPG - Epic Edition\n");
             WriteLine("(N)ew Game");
@@ -37,8 +44,20 @@ namespace Text_Based_Game
             }
             else if (input == "l")
             {
-                currentPlayer = SaveManager.LoadGame();
-                Shop.RunShop(currentPlayer);
+                Clear();
+                if (File.Exists(fullPath + "\\save.json"))
+                {
+                    currentPlayer = SaveManager.LoadGame();
+                    Shop.RunShop(currentPlayer);
+                    Clear();
+                }
+                else
+                {
+                    WriteLine("You do not have a save.");
+                    ReadKey(true);
+                    Clear();
+                    Start();
+                }
                 Clear();
             }
         }
