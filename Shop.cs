@@ -34,6 +34,7 @@ namespace Text_Based_Game
                 WriteLine("(S)tats");
                 WriteLine("=====================");
                 WriteLine("(E)xit");
+                WriteLine("Save and (Q)uit");
                 WriteLine("=====================");
 
                 string input = ReadKey(true).Key.ToString().ToLower();
@@ -58,7 +59,14 @@ namespace Text_Based_Game
                     StatsScreen(player);
                 }
                 else if (input == "e")
+                {
                     break;
+                }
+                else if (input == "q")
+                {
+                    SaveManager.SaveGame(Program.currentPlayer);
+                    Environment.Exit(0);
+                }
 
             }
         }
@@ -92,6 +100,7 @@ namespace Text_Based_Game
                 WriteLine("=====================");
                 WriteLine("    Player Stats     ");
                 WriteLine("=====================");
+                WriteLine("Player Name: " + player.name);
                 WriteLine("Current Health: " + player.health);
                 WriteLine("Coins: " + player.coins);
                 WriteLine("Weapon Strength: " + player.weaponValue);

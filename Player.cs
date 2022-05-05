@@ -8,21 +8,21 @@ namespace Text_Based_Game
 {
     public class Player
     {
-        Random rand = new Random();
+        Random rand { get; set; } = new Random();
 
-        public string name;
-        public int coins = 0;
-        public int health = 10; // Default Health = 10
-        public int damage = 1; // Default Damage = 1
-        public int armorValue = 0;
-        public int potion = 5;
-        public int weaponValue = 1; // Default weaponValue = 1
+        public string name { get; set; }
+        public int coins { get; set; } = 0;
+        public int health { get; set; } = 10; // Default Health = 10
+        public int damage { get; set; } = 1; // Default Damage = 1
+        public int armorValue { get; set; } = 0;
+        public int potion { get; set; } = 5;
+        public int weaponValue { get; set; } = 1; // Default weaponValue = 1
 
-        public int nextLevel = 10;
-        public int level = 1;
-        public int xp = 0;
+        public int nextLevel { get; set; } = 10;
+        public int level { get; set; } = 1;
+        public int xp { get; set; } = 0;
 
-        public int mods = 0;
+        public int mods { get; set; } = 0;
 
         public int GetHealth()
         {

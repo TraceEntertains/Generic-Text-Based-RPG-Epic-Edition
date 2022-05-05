@@ -18,22 +18,42 @@ namespace Text_Based_Game
 
             FirstEncounter firstEncounter = new FirstEncounter();
             firstEncounter.StartBattle();
-            while(mainLoop)
+            while (mainLoop)
             {
                 Encounters.RandomEncounter();
             }
         }
-        
+
         static void Start()
         {
-            WriteLine("Text-Based Game\n");
+            Clear();
+            WriteLine("Generic Text Based RPG - Epic Edition\n");
+            WriteLine("(N)ew Game");
+            WriteLine("(L)oad Game");
+            string input = ReadKey(true).Key.ToString().ToLower();
+            if (input == "n")
+            {
+                NewGame();
+            }
+            else if (input == "l")
+            {
+                currentPlayer = SaveManager.LoadGame();
+                Shop.RunShop(currentPlayer);
+                Clear();
+            }
+        }
+
+        static void NewGame()
+        {
+            Clear();
+            WriteLine("Generic Text Based RPG - Epic Edition\n");
             Write("Name (Optional): ");
             currentPlayer.name = ReadLine();
             Clear();
             WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
-            if(currentPlayer.name == "")
+            if (currentPlayer.name == "")
                 WriteLine("You can't even remember your own name...");
-            else 
+            else
                 WriteLine("You remember that your name is " + currentPlayer.name + ".");
             WriteLine("(Press any key to continue)");
             ReadKey();

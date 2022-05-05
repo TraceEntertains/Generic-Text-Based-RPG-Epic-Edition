@@ -66,7 +66,7 @@ namespace Text_Based_Game
                 WriteLine("=====================");
                 WriteLine("Potions:  " + currentPlayer.potion + "  Health:  " + currentPlayer.health);
                 string input = ReadKey(true).Key.ToString().ToLower();
-                if (input == "a" || input == "attack")
+                if (input == "a")
                 {
                     // Attack
                     WriteLine("");
