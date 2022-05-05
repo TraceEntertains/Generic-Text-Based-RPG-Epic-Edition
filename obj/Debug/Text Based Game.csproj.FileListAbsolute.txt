@@ -1,0 +1,8 @@
+C:\Users\rjmic\Desktop\Text Based RPG\obj\Debug\Text Based Game.csproj.AssemblyReference.cache
+C:\Users\rjmic\Desktop\Text Based RPG\obj\Debug\Text Based Game.csproj.SuggestedBindingRedirects.cache
+C:\Users\rjmic\Desktop\Text Based RPG\obj\Debug\Text Based Game.csproj.CoreCompileInputs.cache
+C:\Users\rjmic\Desktop\Text Based RPG\bin\Debug\Text Based Game.exe.config
+C:\Users\rjmic\Desktop\Text Based RPG\bin\Debug\Text Based Game.exe
+C:\Users\rjmic\Desktop\Text Based RPG\bin\Debug\Text Based Game.pdb
+C:\Users\rjmic\Desktop\Text Based RPG\obj\Debug\Text Based Game.exe
+C:\Users\rjmic\Desktop\Text Based RPG\obj\Debug\Text Based Game.pdb
