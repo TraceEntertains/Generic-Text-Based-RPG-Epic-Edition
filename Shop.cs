@@ -87,8 +87,9 @@ namespace Text_Based_Game
             }
             else
             {
+                Clear();
                 WriteLine("You don't have enough coins.");
-                ReadKey();
+                ReadKey(true);
             }
         }
 

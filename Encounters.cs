@@ -94,7 +94,7 @@ namespace Text_Based_Game
                     WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     currentPlayer.health -= damage;
                     enemy.health -= attack;
-                    ReadKey();
+                    ReadKey(true);
                 }
                 else if (input == "r")
                 {
@@ -108,12 +108,12 @@ namespace Text_Based_Game
                             damage = 0;
                         WriteLine("You lose " + damage + " health and are unable to escape.");
                         currentPlayer.health -= damage;
-                        ReadKey();
+                        ReadKey(true);
                     }
                     else
                     {
                         WriteLine("You use your crazy mobility to evade the attacks of " + enemy.name + " and you escape!");
-                        ReadKey();
+                        ReadKey(true);
 
                         Shop.RunShop(currentPlayer);
                     }
@@ -143,12 +143,12 @@ namespace Text_Based_Game
                         WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
                         currentPlayer.potion--; 
                     }
-                    ReadKey();
+                    ReadKey(true);
                 }
                 if (currentPlayer.health <= 0)
                 {
                     WriteLine("\nAs the " + enemy.name + " strikes you it hits with a fatal blow!");
-                    ReadKey();
+                    ReadKey(true);
                     System.Environment.Exit(0);
                 }
             }
@@ -157,7 +157,7 @@ namespace Text_Based_Game
             WriteLine("\nAs you stand victorious over the " + enemy.name + ", it's body dissolves into " + lootCoins + " gold coins!");
             currentPlayer.coins += lootCoins;
             currentPlayer.LevelCheck(enemy.xp);
-            ReadKey();
+            ReadKey(true);
         }
     }
 }
