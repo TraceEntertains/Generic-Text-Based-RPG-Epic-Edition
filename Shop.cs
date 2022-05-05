@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,83 +11,84 @@ namespace Text_Based_Game
     {
         static int armorMod;
         static int weaponMod;
-        static int difMod;
-        public static void LoadShop(Player p)
+        static int diffMod;
+        public static void LoadShop(Player player)
         {
-            RunShop(p);
+            RunShop(player);
         }
-        public static void RunShop(Player p)
+        public static void RunShop(Player player)
         {
-            int potionP = 20 + 10*difMod;
-            int armorP = 100 * armorMod;
-            int weaponP = 100 * (weaponMod+1);
-            int difP = 300 + 100*p.mods;
+            int potionPlayer = 20 + 10 * diffMod;
+            int armorPlayer = 100 * armorMod;
+            int weaponPlayer = 100 * (weaponMod + 1);
+            int diffPlayer = 300 + 100 * player.mods;
 
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("         Shop        ");
-                Console.WriteLine("=====================");
-                Console.WriteLine("(W)eapon:          $" + weaponP);
-                Console.WriteLine("(A)rmor            $" + armorP);
-                Console.WriteLine("(Potions:          $" + potionP);
-                Console.WriteLine("(D)ifficulty Mod:  $" + difP);
-                Console.WriteLine("=====================\n");
-                Console.WriteLine("(E)xit");
+                Clear();
+                WriteLine("         Shop        ");
+                WriteLine("=====================");
+                WriteLine("(W)eapon:          $" + weaponPlayer); ;
+                WriteLine("(A)rmor            $" + armorPlayer);
+                WriteLine("(P)otions:          $" + potionPlayer);
+                WriteLine("(D)ifficulty Mod:  $" + diffPlayer);
+                WriteLine("=====================\n");
+                WriteLine("(E)xit");
 
 
-                Console.WriteLine("\n    Player Stats     ");
-                Console.WriteLine("=====================");
-                Console.WriteLine("Current Health: " + p.health);
-                Console.WriteLine("Coins: " + p.coins);
-                Console.WriteLine("Weapon Stregenth: " + p.weaponValue);
-                Console.WriteLine("Armor Defense: " + p.armorValue);
-                Console.WriteLine("Potions: " + p.potion);
-                Console.WriteLine("Difficulty Mods: " + p.mods);
-                Console.WriteLine("=====================");
+                WriteLine("\n    Player Stats     ");
+                WriteLine("=====================");
+                WriteLine("Current Health: " + player.health);
+                WriteLine("Coins: " + player.coins);
+                WriteLine("Weapon Stregenth: " + player.weaponValue);
+                WriteLine("Armor Defense: " + player.armorValue);
+                WriteLine("Potions: " + player.potion);
+                WriteLine("Difficulty Mods: " + player.mods);
+                WriteLine("=====================");
 
-                string input = Console.ReadLine().ToLower();
+                string input = ReadKey(true).Key.ToString().ToLower();
                 if (input == "p" || input == "potion")
                 {
-                    TryBuy("potion", potionP, p);
+                    TryBuy("potion", potionPlayer, player);
                 }
                 else if (input == "w" || input == "weapon")
                 {
-                    TryBuy("weapon", weaponP, p);
+                    TryBuy("weapon", weaponPlayer, player);
                 }
                 else if (input == "a" || input == "armor")
                 {
-                    TryBuy("armor", armorP, p);
+                    TryBuy("armor", armorPlayer, player);
                 }
                 else if (input == "d" || input == "difficulty mod")
                 {
-                    TryBuy("dif", difP, p);
+                    TryBuy("diff", diffPlayer, player);
                 }
                 else if (input == "e" || input == "exit")
                     break;
-                
+
             }
         }
-        static void TryBuy(string item, int cost, Player p)
+        static void TryBuy(string item, int cost, Player player)
         {
-            if(p.coins >= cost)
+            if (player.coins >= cost)
             {
                 if (item == "potion")
-                    p.potion++;
-                else if(item == "weapon")
-                    p.weaponValue++;
-                else if(item == "armor")
-                    p.armorValue++;
-                else if (item == "dif")
-                    p.mods++;
+                    player.potion++;
+                else if (item == "weapon")
+                    player.weaponValue++;
+                else if (item == "armor")
+                    player.armorValue++;
+                else if (item == "diff")
+                    player.mods++;
 
-                p.coins -= cost;
+                player.coins -= cost;
 
             }
             else
             {
-                Console.WriteLine("You don't have enough coins.");
-                _ = Console.ReadKey(true).Key.ToString();
+
+                WriteLine("You don't have enough coins.");
+                ReadKey();
             }
         }
     }
