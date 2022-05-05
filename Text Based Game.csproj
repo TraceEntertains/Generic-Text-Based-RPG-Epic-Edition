@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C8A118DD-F815-4EC5-BD2A-277A8EB2B875}</ProjectGuid>
@@ -44,6 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encounters.cs" />
+    <Compile Include="Enemies\BasicEnemy.cs" />
+    <Compile Include="Enemies\FirstEncounter.cs" />
+    <Compile Include="Enemies\SkeletonArcher.cs" />
+    <Compile Include="Enemies\Slime.cs" />
+    <Compile Include="Enemies\SlimeKing.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

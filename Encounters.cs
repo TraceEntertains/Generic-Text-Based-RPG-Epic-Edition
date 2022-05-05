@@ -1,4 +1,5 @@
 ﻿using System;
+using Text_Based_Game.Enemies;
 using static System.Console;
 using static Text_Based_Game.Program;
 using System.Collections.Generic;
@@ -11,61 +12,22 @@ namespace Text_Based_Game
     public class Encounters
     {
         static Random rand = new Random();
-        static int coinExponential = (int)1.2;
-        //Encounter Generic
 
         // Encounters
-        public static void FirstEncounter()
-        {
-            WriteLine("You see the creature start hopping towards you. You pick up a stick just to be safe.");
-            WriteLine("The creature leaps towards you in a fearocious fashion.");
-            WriteLine("\n(Press any key to continue)");
-            ReadKey();
-            Combat(false, "Slime", 1, 4);
-        }
-        public static void BasicFightEncounter()
-        {
-            Clear();
-            WriteLine("You walk around the great plains and find a monster!");
-            ReadKey();
-            Combat(true, "", 0, 0);
-        }
-        public static void SkeletonArcherEncounter()
-        {
-            Clear();
-            WriteLine("As you are walking around you found a small fortress. \nYou see a figure perched on the the top with something in hand. \nThe figure starts to fire at you!");
-            ReadKey();
-            int skeleArchPower = rand.Next(3, 5);
-            int skeleArchHealth = rand.Next(7, 10);
-            Combat(false, "Skeleton Archer", skeleArchPower, skeleArchHealth);
-            int skeleArchlootCoins = rand.Next(30, 70);
-            currentPlayer.coins += skeleArchlootCoins;
 
-        }
         public static void SlimeEncounter()
         {
             Clear();
-            Random slimeRNG = new Random();
-            int slimePower = rand.Next(1, 4);
-            int slimeHealth = rand.Next(5, 10);
-            int kingSlimePower = rand.Next(20, 50);
-            int kingSlimeHealth = rand.Next(50, 100);
-            
-
-            if (slimeRNG.Next(0,21) == 1)
+            if (rand.Next(0,21) == 1)
             {
-                WriteLine("Loud thuds pounce towards your wake. Fear trembles down your spine. Then you spot it! \n KING SLIME HAS APPEARED!");
-                ReadKey();
-                Combat(false, "King Slime", kingSlimePower, kingSlimeHealth);
-                int kingSlimeCoins = rand.Next(100, 150);
-                currentPlayer.coins += kingSlimeCoins;
+                SlimeKing slimeKing = new SlimeKing();
+                slimeKing.StartBattle();
             }
 
             else
             {
-                WriteLine("You spot a blue little blob in the distance that is hastly approaching!.");
-                ReadKey();
-                Combat(false, "Slime", slimePower, slimeHealth);
+                Slime slime = new Slime();
+                slime.StartBattle();
             }
 
         Clear();
@@ -76,31 +38,28 @@ namespace Text_Based_Game
             switch(rand.Next(0,3))
             {
                 case 0:
-                    BasicFightEncounter();
+                    BasicEnemy basicEnemy = new BasicEnemy();
+                    basicEnemy.StartBattle();
                     break;
                 case 1:
-                    SkeletonArcherEncounter();
+                    SkeletonArcher skeletonArcher = new SkeletonArcher();
+                    skeletonArcher.StartBattle();
                     break;
                 case 2:
-                    SlimeEncounter();
+                    //SlimeEncounter();
                     break;
                 // Legendary Slime Fight with if else statement small %                                                                                
             }
         }
-        public static void Combat(bool random, string name = "", int power = 0, int health = 0)
-        {
-            if (random)
-            {
-                name = GetName();
-                power = currentPlayer.GetPower();
-                health = currentPlayer.GetHealth();
-            }
 
-            while (health > 0)
+        public static void Combat(Enemy enemy)
+        {
+
+            while (enemy.health > 0)
             {
                 Clear();
-                WriteLine(name);
-                WriteLine(power + " Attack" + " / " + health + " Health");
+                WriteLine(enemy.name);
+                WriteLine(enemy.power + " Attack" + " / " + enemy.health + " Health");
                 WriteLine("\n=====================");
                 WriteLine("| (A)ttack (D)efend |");
                 WriteLine("|   (R)un   (H)eal  |");
@@ -111,14 +70,14 @@ namespace Text_Based_Game
                 {
                     // Attack
                     WriteLine("");
-                    WriteLine("You run forward swinging hoping to hit something! As you pass, the " + name + " strikes you back!");
-                    int damage = power - currentPlayer.armorValue;
+                    WriteLine("You run forward swinging hoping to hit something! As you pass, the " + enemy.name + " strikes you back!");
+                    int damage = enemy.power - currentPlayer.armorValue;
                     if (damage < 0)
                         damage = 0;
                     int attack = rand.Next(0, currentPlayer.weaponValue) + rand.Next(1, 4);
                     WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     currentPlayer.health -= damage;
-                    health -= attack;
+                    enemy.health -= attack;
                     ReadKey(true);
                 }
 
@@ -126,15 +85,15 @@ namespace Text_Based_Game
                 {
                     // Defend
                     WriteLine("");
-                    WriteLine("As the " + name + " prepares to strike, you ready your sword in a defensive stance!");
-                    int damage = (power / 4) - currentPlayer.armorValue;
+                    WriteLine("As the " + enemy.name + " prepares to strike, you ready your sword in a defensive stance!");
+                    int damage = (enemy.power / 4) - currentPlayer.armorValue;
                     if (damage < 0)
                         damage = 0;
                     int attack = rand.Next(0, currentPlayer.weaponValue) / 2;
 
                     WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     currentPlayer.health -= damage;
-                    health -= attack;
+                    enemy.health -= attack;
                     ReadKey();
                 }
                 else if (input == "r")
@@ -143,8 +102,8 @@ namespace Text_Based_Game
                     WriteLine("");
                     if (rand.Next(0, 2) == 0)
                     { 
-                        WriteLine("As you sprint away from the " + name + ", its strike catches you in the back, sending you sprawling onto the ground!");
-                        int damage = power - currentPlayer.armorValue;
+                        WriteLine("As you sprint away from the " + enemy.name + ", its strike catches you in the back, sending you sprawling onto the ground!");
+                        int damage = enemy.power - currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
                         WriteLine("You lose " + damage + " health and are unable to escape.");
@@ -153,7 +112,7 @@ namespace Text_Based_Game
                     }
                     else
                     {
-                        WriteLine("You use your crazy mobility to evade the attacks of " + name + " and you escape!");
+                        WriteLine("You use your crazy mobility to evade the attacks of " + enemy.name + " and you escape!");
                         ReadKey();
 
                         Shop.RunShop(currentPlayer);
@@ -166,10 +125,10 @@ namespace Text_Based_Game
                     if (currentPlayer.potion == 0)
                     {
                         WriteLine("As you desperately grasp for a potion in your bag, all that you can find is empty glass flasks!");
-                        int damage = power - currentPlayer.armorValue;
+                        int damage = enemy.power - currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
-                        WriteLine("The " + name + " strikes you with a mighty blow, and you lose " + damage + " health!");
+                        WriteLine("The " + enemy.name + " strikes you with a mighty blow, and you lose " + damage + " health!");
                     }
                     else
                     {
@@ -177,8 +136,8 @@ namespace Text_Based_Game
                            int potionV = 5;
                         WriteLine("You gain " + potionV + " health");
                         currentPlayer.health += potionV;
-                        WriteLine("As you were occupied, the " + name + " advanced and struck.");
-                            int damage = (power/2)-currentPlayer.armorValue;
+                        WriteLine("As you were occupied, the " + enemy.name + " advanced and struck.");
+                            int damage = (enemy.power /2)-currentPlayer.armorValue;
                         if(damage<0)
                             damage=0;
                         WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
@@ -188,38 +147,17 @@ namespace Text_Based_Game
                 }
                 if (currentPlayer.health <= 0)
                 {
-                    WriteLine("\nAs the " + name + " strikes you it hits with a fatal blow!");
+                    WriteLine("\nAs the " + enemy.name + " strikes you it hits with a fatal blow!");
                     ReadKey();
                     System.Environment.Exit(0);
                 }
             }
-            int lootCoins = (int)Math.Pow(currentPlayer.level * coinExponential, 1.5) * rand.Next(10, 50);
+            int lootCoins = currentPlayer.CoinCalc();
             // Add A Slime Sword Later!
-            WriteLine("\nAs you stand victorious over the " + name + ", it's body dissolves into " + lootCoins + " gold coins!");
+            WriteLine("\nAs you stand victorious over the " + enemy.name + ", it's body dissolves into " + lootCoins + " gold coins!");
             currentPlayer.coins += lootCoins;
+            currentPlayer.LevelCheck(enemy.xp);
             ReadKey();
-        }
-
-        public static void LevelCheck()
-        {
-
-        }
-
-        public static string GetName()
-        {
-            switch (rand.Next(0, 4))
-            {
-                //Add More Enemies Later
-                case 0:
-                    return "Skeleton";
-                case 1:
-                    return "Zombie";
-                case 2:
-                    return "Low Class Demon";
-                case 3:
-                    return "Demon Bunny";
-            }
-            return "Bandit";
         }
     }
 }

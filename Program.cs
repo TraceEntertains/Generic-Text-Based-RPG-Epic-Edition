@@ -1,5 +1,6 @@
 ﻿using System;
 using static System.Console;
+using Text_Based_Game.Enemies;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,9 @@ namespace Text_Based_Game
         static void Main(string[] args)
         {
             Start();
-            Encounters.FirstEncounter();
+
+            FirstEncounter firstEncounter = new FirstEncounter();
+            firstEncounter.StartBattle();
             while(mainLoop)
             {
                 Encounters.RandomEncounter();
