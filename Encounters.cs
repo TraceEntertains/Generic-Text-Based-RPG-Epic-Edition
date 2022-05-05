@@ -142,6 +142,7 @@ namespace Text_Based_Game
                         if (damage < 0)
                             damage = 0;
                         WriteLine("You lose " + damage + " health and are unable to escape.");
+                        currentPlayer.health -= damage;
                         ReadKey();
                     }
                     else
