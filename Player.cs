@@ -9,7 +9,7 @@ namespace Text_Based_Game
     public class Player
     {
         Random rand = new Random();
-        //This is a test change
+
         public string name;
         public int coins = 0;
         public int health = 10; // Default Health = 10
