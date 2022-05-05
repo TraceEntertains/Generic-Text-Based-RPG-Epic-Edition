@@ -24,18 +24,18 @@ namespace Text_Based_Game
         static void Start()
         {
             Console.WriteLine("Text-Based Game\n");
-            Console.Write("Name: ");
+            Console.Write("Name (Optional): ");
             currentPlayer.name = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("You awake in await bright field. You're feeling dazed and having trouble remebering what happened.\n");
+            Console.WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
             if(currentPlayer.name == "")
-                Console.WriteLine("You can't even remeber your own name...");
+                Console.WriteLine("You can't even remember your own name...");
                 else 
-                Console.WriteLine("You remeber your name is " + currentPlayer.name + ".");
-            Console.WriteLine("(press any key to countine)");
+                Console.WriteLine("You remember that your name is " + currentPlayer.name + ".");
+            Console.WriteLine("(Press any key to continue)");
             Console.ReadKey();
             Console.Clear();
-            Console.WriteLine("You wonder around in the fields till you find a creature.");
+            Console.WriteLine("You wander around in the fields till you find a creature.");
         }
     }
 }

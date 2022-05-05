@@ -8,7 +8,7 @@ namespace Text_Based_Game
 {
     public class Player
     {
-        Random rand;
+        Random rand = new Random();
 
         public string name;
         public int coins = 0;
@@ -17,6 +17,11 @@ namespace Text_Based_Game
         public int armorValue = 0;
         public int potion = 5;
         public int weaponValue = 1; // Default weaponValue = 1
+
+        public int nextLevel = 10;
+        public int nextLevelBase;
+        public int level = 1;
+        public int xp = 0;
 
         public int mods = 0;
 
