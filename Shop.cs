@@ -25,6 +25,8 @@ namespace Text_Based_Game
                 WriteLine("=====================");
                 WriteLine("         Shop        ");
                 WriteLine("=====================");
+                WriteLine("Coins: " + player.coins);
+                WriteLine("=====================");
                 WriteLine("(W)eapon:          $" + weaponPlayer);
                 WriteLine("(A)rmor            $" + armorPlayer);
                 WriteLine("(P)otions:         $" + potionPlayer);
@@ -91,7 +93,6 @@ namespace Text_Based_Game
                 WriteLine("    Player Stats     ");
                 WriteLine("=====================");
                 WriteLine("Current Health: " + player.health);
-                WriteLine("Coins: " + player.coins);
                 WriteLine("Weapon Strength: " + player.weaponValue);
                 WriteLine("Armor Defense: " + player.armorValue);
                 WriteLine("Potions: " + player.potion);

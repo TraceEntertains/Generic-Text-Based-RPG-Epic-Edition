@@ -18,22 +18,22 @@ namespace Text_Based_Game
         public static void FirstEncounter()
         {
             WriteLine("You see the creature start hopping towards you. You pick up a stick just to be safe.");
-            WriteLine("The creature leaps towards you in a fearious fasion.");
-            WriteLine("\n(Press any key to countine)");
+            WriteLine("The creature leaps towards you in a fearocious fashion.");
+            WriteLine("\n(Press any key to continue)");
             ReadKey();
             Combat(false, "Slime", 1, 4);
         }
         public static void BasicFightEncounter()
         {
             Clear();
-            WriteLine("You walk around the great plans and find a monster!");
+            WriteLine("You walk around the great plains and find a monster!");
             ReadKey();
             Combat(true, "", 0, 0);
         }
         public static void SkeletonArcherEncounter()
         {
             Clear();
-            WriteLine("As you are walking around you found a small fortress. \nYou see a figured perched on the the top with something in hand. \nThe figure starts to fire at you!");
+            WriteLine("As you are walking around you found a small fortress. \nYou see a figure perched on the the top with something in hand. \nThe figure starts to fire at you!");
             ReadKey();
             int skeleArchPower = rand.Next(3, 5);
             int skeleArchHealth = rand.Next(7, 10);
@@ -50,7 +50,7 @@ namespace Text_Based_Game
 
             if (slimeRNG.Next(0,21) == 1)
             {
-                WriteLine("Loud thuds pounce towards your wake. Fear trembels down your spine. Then you spot it! \n KING SLIME HAS APPEARED!");
+                WriteLine("Loud thuds pounce towards your wake. Fear trembles down your spine. Then you spot it! \n KING SLIME HAS APPEARED!");
                 ReadKey();
                 Combat(false, "King Slime", kingSlimePower, kingSlimeHealth);
             }
@@ -113,7 +113,7 @@ namespace Text_Based_Game
                     WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     currentPlayer.health -= damage;
                     health -= attack;
-                    ReadKey();
+                    ReadKey(true);
                 }
 
                 else if (input == "d")
@@ -147,10 +147,10 @@ namespace Text_Based_Game
                     }
                     else
                     {
-                            WriteLine("You use your crazy mobility to evade the attacks of " + name + " and you escape!");
-                            ReadKey();
+                        WriteLine("You use your crazy mobility to evade the attacks of " + name + " and you escape!");
+                        ReadKey();
 
-                            Shop.RunShop(currentPlayer);
+                        Shop.RunShop(currentPlayer);
                     }
                 }
                 else if (input == "h")
@@ -190,6 +190,7 @@ namespace Text_Based_Game
             int coins = (int)Math.Pow(currentPlayer.level * coinExponential, 1.5) * rand.Next(10, 50);
             // Add A Slime Sword Later!
             WriteLine("\nAs you stand victorious over the " + name + ", it's body dissolves into " + coins + " gold coins!");
+            currentPlayer.coins += coins;
             ReadKey();
         }
 
