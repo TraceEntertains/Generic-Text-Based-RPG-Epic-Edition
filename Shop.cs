@@ -31,38 +31,62 @@ namespace Text_Based_Game
                 Console.WriteLine("(A)rmor            $" + armorP);
                 Console.WriteLine("(Potions:          $" + potionP);
                 Console.WriteLine("(D)ifficulty Mod:  $" + difP);
+                Console.WriteLine("=====================\n");
+                Console.WriteLine("(E)xit");
+
+
+                Console.WriteLine("\n    Player Stats     ");
                 Console.WriteLine("=====================");
-                //Wait For Input
+                Console.WriteLine("Current Health: " + p.health);
+                Console.WriteLine("Coins: " + p.coins);
+                Console.WriteLine("Weapon Stregenth: " + p.weaponValue);
+                Console.WriteLine("Armor Defense: " + p.armorValue);
+                Console.WriteLine("Potions: " + p.potion);
+                Console.WriteLine("Difficulty Mods: " + p.mods);
+                Console.WriteLine("=====================");
+
                 string input = Console.ReadLine().ToLower();
                 if (input == "p" || input == "potion")
                 {
-
+                    TryBuy("potion", potionP, p);
                 }
                 else if (input == "w" || input == "weapon")
                 {
-
+                    TryBuy("weapon", weaponP, p);
                 }
                 else if (input == "a" || input == "armor")
                 {
-
+                    TryBuy("armor", armorP, p);
                 }
                 else if (input == "d" || input == "difficulty mod")
                 {
-
+                    TryBuy("dif", difP, p);
                 }
+                else if (input == "e" || input == "exit")
+                    break;
                 
             }
         }
-        static void Buy(string item, int cost, Player p)
+        static void TryBuy(string item, int cost, Player p)
         {
             if(p.coins >= cost)
             {
+                if (item == "potion")
+                    p.potion++;
+                else if(item == "weapon")
+                    p.weaponValue++;
+                else if(item == "armor")
+                    p.armorValue++;
+                else if (item == "dif")
+                    p.mods++;
+
+                p.coins -= cost;
 
             }
             else
             {
                 Console.WriteLine("You don't have enough coins.");
-                Console.ReadKey();
+                _ = Console.ReadKey(true).Key.ToString();
             }
         }
     }
