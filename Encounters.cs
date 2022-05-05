@@ -148,6 +148,7 @@ namespace Text_Based_Game
                     {
                             WriteLine("You use your crazy mobility to evade the attacks of " + name + " and you escape!");
                             ReadKey();
+
                             Shop.RunShop(currentPlayer);
                     }
                 }
