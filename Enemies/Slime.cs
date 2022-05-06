@@ -11,10 +11,10 @@ namespace Text_Based_Game.Enemies
     {
         new public void StartBattle()
         {
-            name = "Slime";
-            power = rand.Next(1, 4);
-            health = rand.Next(5, 10);
-            xp = rand.Next(3, 5);
+            Name = "Slime";
+            Power = rand.Next(1, 4);
+            Health = rand.Next(5, 10);
+            XP = rand.Next(3, 5);
 
             PreBattle();
 

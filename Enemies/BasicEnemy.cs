@@ -11,9 +11,9 @@ namespace Text_Based_Game.Enemies
     {
         new public void StartBattle()
         {
-            name = GetName();
-            power = Program.currentPlayer.GetPower();
-            health = Program.currentPlayer.GetPower();
+            Name = GetName();
+            Power = Program.currentPlayer.GetPower();
+            Health = Program.currentPlayer.GetPower();
             xp = rand.Next(3, 5);
 
             PreBattle();

@@ -9,16 +9,16 @@ namespace Text_Based_Game
 {
     public class Shop
     {
-        static int armorMod { get; set; }
-        static int weaponMod { get; set; }
-        static int diffMod { get; set; }
+        static int ArmorMod { get; set; }
+        static int WeaponMod { get; set; }
+        static int DiffMod { get; set; }
 
         public static void RunShop(Player player)
         {
-            int potionPlayer = 20 + 10 * diffMod;
-            int armorPlayer = 100 * (armorMod + 1);
-            int weaponPlayer = 100 * (weaponMod + 1);
-            int diffPlayer = 300 + 100 * player.mods;
+            int potionPlayer = 20 + 10 * DiffMod;
+            int armorPlayer = 100 * (ArmorMod + 1);
+            int weaponPlayer = 100 * (WeaponMod + 1);
+            int diffPlayer = 300 + 100 * player.Mods;
 
             while (true)
             {
@@ -26,7 +26,7 @@ namespace Text_Based_Game
                 WriteLine("=====================");
                 WriteLine("         Shop        ");
                 WriteLine("=====================");
-                WriteLine("Coins: " + player.coins);
+                WriteLine("Coins: " + player.Coins);
                 WriteLine("=====================");
                 WriteLine("(W)eapon:          $" + weaponPlayer);
                 WriteLine("(A)rmor            $" + armorPlayer);
@@ -65,7 +65,7 @@ namespace Text_Based_Game
                 }
                 else if (input == "q")
                 {
-                    SaveManager.SaveGame(Program.currentPlayer);
+                    SaveManager.SaveGame(Program.CurrentPlayer);
                     Environment.Exit(0);
                 }
 
@@ -73,18 +73,18 @@ namespace Text_Based_Game
         }
         static void TryBuy(string item, int cost, Player player)
         {
-            if (player.coins >= cost)
+            if (player.Coins >= cost)
             {
                 if (item == "potion")
-                    player.potion++;
+                    player.Potion++;
                 else if (item == "weapon")
-                    player.weaponValue++;
+                    player.WeaponValue++;
                 else if (item == "armor")
-                    player.armorValue++;
+                    player.ArmorValue++;
                 else if (item == "diff")
-                    player.mods++;
+                    player.Mods++;
 
-                player.coins -= cost;
+                player.Coins -= cost;
             }
             else
             {
@@ -102,13 +102,13 @@ namespace Text_Based_Game
                 WriteLine("=====================");
                 WriteLine("    Player Stats     ");
                 WriteLine("=====================");
-                WriteLine("Player Name: " + player.name);
-                WriteLine("Current Health: " + player.health);
-                WriteLine("Coins: " + player.coins);
-                WriteLine("Weapon Strength: " + player.weaponValue);
-                WriteLine("Armor Defense: " + player.armorValue);
-                WriteLine("Potions: " + player.potion);
-                WriteLine("Difficulty Mods: " + player.mods);
+                WriteLine("Player Name: " + player.Name);
+                WriteLine("Current Health: " + player.Health);
+                WriteLine("Coins: " + player.Coins);
+                WriteLine("Weapon Strength: " + player.WeaponValue);
+                WriteLine("Armor Defense: " + player.ArmorValue);
+                WriteLine("Potions: " + player.Potion);
+                WriteLine("Difficulty Mods: " + player.Mods);
                 WriteLine("=====================");
                 WriteLine("(B)ack");
                 WriteLine("(E)xit");

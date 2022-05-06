@@ -9,16 +9,16 @@ namespace Text_Based_Game.Enemies
 {
     public class Enemy
     {
-        public Random rand = new Random();
+        public Random rand = new();
 
-        public string name = "";
-        public int power = 1;
-        public int health = 1;
+        public string Name { get; set; } = "";
+        public int Power { get; set; } = 1;
+        public int Health { get; set; } = 1;
         public int coinBonus = 0;
-        public int xp = 0;
+        public int XP = 0;
         public bool isBoss = false;
 
-        public static List<Enemy> enemies = new List<Enemy>();
+        public static List<Enemy> enemies = new();
 
         public Enemy()
         {

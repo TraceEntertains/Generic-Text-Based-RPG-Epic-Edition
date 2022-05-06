@@ -12,7 +12,7 @@ namespace Text_Based_Game
     {
         public static Player LoadGame()
         {
-            FileStream save = File.OpenRead(Program.fullPath + "\\save.json");
+            FileStream save = File.OpenRead(Program.FullPath + "\\save.json");
             Player player = JsonSerializer.Deserialize<Player>(save);
             save.Close();
             return player;
@@ -20,7 +20,7 @@ namespace Text_Based_Game
 
         public static void SaveGame(Player player)
         {
-            File.WriteAllText(Program.fullPath + "\\save.json", JsonSerializer.Serialize(player));
+            File.WriteAllText(Program.FullPath + "\\save.json", JsonSerializer.Serialize(player));
         }
     }
 }

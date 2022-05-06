@@ -11,18 +11,18 @@ namespace Text_Based_Game
 {
     internal class Program
     {
-        public static Player currentPlayer { get; set; } = new Player();
-        public static string appDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        public static string appDataFolderName { get; set; } = "\\GTBRPGEE";
-        public static string fullPath { get; set; }
-        public static bool mainLoop { get; set; } = true;
+        public static Player CurrentPlayer { get; set; } = new Player();
+        public static string AppDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        public static string AppDataFolderName { get; set; } = "\\GTBRPGEE";
+        public static string FullPath { get; set; }
+        public static bool MainLoop { get; set; } = true;
         static void Main(string[] args)
         {
             Start();
 
-            FirstEncounter firstEncounter = new FirstEncounter();
+            FirstEncounter firstEncounter = new();
             firstEncounter.StartBattle();
-            while (mainLoop)
+            while (MainLoop)
             {
                 Encounters.RandomEncounter();
             }
@@ -30,9 +30,9 @@ namespace Text_Based_Game
 
         static void Start()
         {
-            if (Directory.Exists(appDataDirectory + appDataFolderName) == false)
-                Directory.CreateDirectory(appDataDirectory + appDataFolderName);
-            fullPath = appDataDirectory + appDataFolderName;
+            if (Directory.Exists(AppDataDirectory + AppDataFolderName) == false)
+                Directory.CreateDirectory(AppDataDirectory + AppDataFolderName);
+            FullPath = AppDataDirectory + AppDataFolderName;
             Clear();
             WriteLine("Generic Text Based RPG - Epic Edition\n");
             WriteLine("(N)ew Game");
@@ -45,10 +45,10 @@ namespace Text_Based_Game
             else if (input == "l")
             {
                 Clear();
-                if (File.Exists(fullPath + "\\save.json"))
+                if (File.Exists(FullPath + "\\save.json"))
                 {
-                    currentPlayer = SaveManager.LoadGame();
-                    Shop.RunShop(currentPlayer);
+                    CurrentPlayer = SaveManager.LoadGame();
+                    Shop.RunShop(CurrentPlayer);
                     Clear();
                 }
                 else
@@ -67,13 +67,13 @@ namespace Text_Based_Game
             Clear();
             WriteLine("Generic Text Based RPG - Epic Edition\n");
             Write("Name (Optional): ");
-            currentPlayer.name = ReadLine();
+            CurrentPlayer.Name = ReadLine();
             Clear();
             WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
-            if (currentPlayer.name == "")
+            if (CurrentPlayer.Name == "")
                 WriteLine("You can't even remember your own name...");
             else
-                WriteLine("You remember that your name is " + currentPlayer.name + ".");
+                WriteLine("You remember that your name is " + CurrentPlayer.Name + ".");
             WriteLine("(Press any key to continue)");
             ReadKey();
             Clear();

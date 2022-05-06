@@ -11,9 +11,9 @@ namespace Text_Based_Game.Enemies
     {
         new public void StartBattle()
         {
-            name = "Slime";
-            power = 1;
-            health = 4;
+            Name = "Slime";
+            Power = 1;
+            Health = 4;
             xp = rand.Next(3, 5);
 
             PreBattle();

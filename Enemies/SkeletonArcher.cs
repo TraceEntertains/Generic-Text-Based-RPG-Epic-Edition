@@ -12,10 +12,10 @@ namespace Text_Based_Game.Enemies
 
         new public void StartBattle()
         {
-            name = "Skeleton Archer";
+            Name = "Skeleton Archer";
             coinBonus = rand.Next(30, 70);
-            power = rand.Next(3, 5);
-            health = rand.Next(7, 10);
+            Power = rand.Next(3, 5);
+            Health = rand.Next(7, 10);
             xp = rand.Next(3, 5);
 
             PreBattle();
