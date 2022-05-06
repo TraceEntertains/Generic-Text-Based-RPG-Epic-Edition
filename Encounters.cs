@@ -178,7 +178,7 @@ namespace Text_Based_Game
                 }
                 else
                 {
-                    WriteLine("\nThe thought about drinking another potion sickens you.");
+                    WriteLine("\nThe thought of drinking even one more potion sickens you.");
                 }
             }
             ReadKey(true);
