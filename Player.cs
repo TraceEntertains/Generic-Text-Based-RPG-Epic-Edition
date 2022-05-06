@@ -45,10 +45,15 @@ namespace Text_Based_Game
         {
             XP += newxp;
             NextLevel -= newxp;
+            Console.WriteLine(XP + " " + NextLevel + " " + newxp);
             if (NextLevel <= 0)
             {
-                NextLevel += (int)Math.Round((double)4 * (Level ^ 3) / 5);
-                LevelUp();
+                while (NextLevel < 0)
+                {
+                    NextLevel += ((5 * Level) ^ 3) / 4;
+                    Console.WriteLine(NextLevel);
+                    LevelUp();
+                }
                 return true;
             }
             return false;

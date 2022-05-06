@@ -21,7 +21,7 @@ namespace Text_Based_Game.Enemies
 
         public override void PreBattle()
         {
-            WriteLine("Loud thuds pounce towards your wake. Fear trembles down your spine. Then you spot it! \n KING SLIME HAS APPEARED!");
+            WriteLine("Loud thuds pounce towards your wake. Fear trembles down your spine. Then you spot it! \nKING SLIME HAS APPEARED!");
             ReadKey();
         }
 

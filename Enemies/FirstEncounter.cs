@@ -8,7 +8,7 @@ namespace Text_Based_Game.Enemies
         public override int Power { get; set; } = 1;
         public override int Health { get; set; } = 4;
         public override int CoinBonus { get; set; } = 0;
-        public override int XP { get; set; } = Rand.Next(3, 5);
+        public override int XP { get; set; } = Rand.Next(1, 4);
         public override bool IsBoss { get; set; } = false;
 
         public override void StartBattle()
