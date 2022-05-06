@@ -1,12 +1,9 @@
-﻿using System;
-using static System.Console;
+﻿using static System.Console;
 
 namespace Text_Based_Game.Enemies
 {
     public class FirstEncounter : Enemy
     {
-        public static Random Rand { get; set; } = new();
-
         public override string Name { get; set; } = "Slime";
         public override int Power { get; set; } = 1;
         public override int Health { get; set; } = 4;

@@ -5,8 +5,6 @@ namespace Text_Based_Game.Enemies
 {
     public class SlimeKing : Enemy
     {
-        public static Random Rand { get; set; } = new();
-
         public override string Name { get; set; } = "Slime King";
         public override int Power { get; set; } = Rand.Next(20, 50);
         public override int Health { get; set; } = Rand.Next(50, 100);

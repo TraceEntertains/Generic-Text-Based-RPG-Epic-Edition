@@ -5,8 +5,6 @@ namespace Text_Based_Game.Enemies
 {
     public class BasicEnemy : Enemy
     {
-        public static Random Rand { get; set; } = new();
-
         public override string Name { get; set; } = GetName();
         public override int Power { get; set; } = Program.CurrentPlayer.GetPower();
         public override int Health { get; set; } = Program.CurrentPlayer.GetPower();

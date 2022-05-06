@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Text_Based_Game.Enemies
 {
@@ -11,7 +12,9 @@ namespace Text_Based_Game.Enemies
         public abstract int XP { get; set; }
         public abstract bool IsBoss { get; set; }
 
-        public static List<Enemy> Enemies { get; set; }
+        public static Random Rand { get; set; } = new();
+
+        public static List<Enemy> Enemies { get; set; } = new();
 
         public abstract void StartBattle();
         public abstract void PreBattle();

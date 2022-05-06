@@ -155,6 +155,7 @@ namespace Text_Based_Game
                 if (damage < 0)
                     damage = 0;
                 WriteLine("The " + enemy.Name + " strikes you with a mighty blow, and you lose " + damage + " health!");
+                CurrentPlayer.Health -= damage;
             }
             else
             {
@@ -167,6 +168,7 @@ namespace Text_Based_Game
                 if (damage < 0)
                     damage = 0;
                 WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
+                CurrentPlayer.Health -= damage;
                 CurrentPlayer.Potion--;
             }
             ReadKey(true);

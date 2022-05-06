@@ -5,8 +5,6 @@ namespace Text_Based_Game.Enemies
 {
     public class SkeletonArcher : Enemy
     {
-        public static Random Rand { get; set; } = new();
-
         public override string Name { get; set; } = "Skeleton Archer";
         public override int Power { get; set; } = Rand.Next(3, 5);
         public override int Health { get; set; } = Rand.Next(7, 10);
