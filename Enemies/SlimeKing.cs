@@ -12,6 +12,7 @@ namespace Text_Based_Game.Enemies
         new public void StartBattle()
         {
             name = "Slime King";
+            isBoss = true;
             coinBonus = rand.Next(100, 150);
             power = rand.Next(20, 50);
             health = rand.Next(50, 100);

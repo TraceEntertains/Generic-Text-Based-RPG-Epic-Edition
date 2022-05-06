@@ -11,11 +11,11 @@ namespace Text_Based_Game
 {
     internal class Program
     {
-        public static Player currentPlayer = new Player();
-        public static string appDataDirectory = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        public static string appDataFolderName = "\\GTBRPGEE";
-        public static string fullPath;
-        public static bool mainLoop = true;
+        public static Player currentPlayer { get; set; } = new Player();
+        public static string appDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        public static string appDataFolderName { get; set; } = "\\GTBRPGEE";
+        public static string fullPath { get; set; }
+        public static bool mainLoop { get; set; } = true;
         static void Main(string[] args)
         {
             Start();

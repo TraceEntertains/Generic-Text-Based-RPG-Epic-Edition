@@ -9,9 +9,10 @@ namespace Text_Based_Game
 {
     public class Shop
     {
-        static int armorMod;
-        static int weaponMod;
-        static int diffMod;
+        static int armorMod { get; set; }
+        static int weaponMod { get; set; }
+        static int diffMod { get; set; }
+
         public static void RunShop(Player player)
         {
             int potionPlayer = 20 + 10 * diffMod;
@@ -115,7 +116,7 @@ namespace Text_Based_Game
 
                 string input = ReadKey(true).Key.ToString().ToLower();
                 if (input == "b")
-                    RunShop(player);
+                    break;
                 else if (input == "e")
                     Encounters.RandomEncounter();
             }

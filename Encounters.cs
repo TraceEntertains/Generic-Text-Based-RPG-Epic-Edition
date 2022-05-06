@@ -11,7 +11,7 @@ namespace Text_Based_Game
 {
     public class Encounters
     {
-        static Random rand = new Random();
+        static Random rand { get; set; } = new Random();
 
         // Encounters
 
@@ -23,7 +23,6 @@ namespace Text_Based_Game
                 SlimeKing slimeKing = new SlimeKing();
                 slimeKing.StartBattle();
             }
-
             else
             {
                 Slime slime = new Slime();
@@ -46,7 +45,7 @@ namespace Text_Based_Game
                     skeletonArcher.StartBattle();
                     break;
                 case 2:
-                    //SlimeEncounter();
+                    SlimeEncounter();
                     break;
                 // Legendary Slime Fight with if else statement small %                                                                                
             }
@@ -68,82 +67,20 @@ namespace Text_Based_Game
                 string input = ReadKey(true).Key.ToString().ToLower();
                 if (input == "a")
                 {
-                    // Attack
-                    WriteLine("");
-                    WriteLine("You run forward swinging hoping to hit something! As you pass, the " + enemy.name + " strikes you back!");
-                    int damage = enemy.power - currentPlayer.armorValue;
-                    if (damage < 0)
-                        damage = 0;
-                    int attack = rand.Next(0, currentPlayer.weaponValue) + rand.Next(1, 4);
-                    WriteLine("You lose " + damage + " health and deal " + attack + " damage");
-                    currentPlayer.health -= damage;
-                    enemy.health -= attack;
-                    ReadKey(true);
+                    Attack(enemy);
                 }
 
                 else if (input == "d")
                 {
-                    // Defend
-                    WriteLine("");
-                    WriteLine("As the " + enemy.name + " prepares to strike, you ready your sword in a defensive stance!");
-                    int damage = (enemy.power / 4) - currentPlayer.armorValue;
-                    if (damage < 0)
-                        damage = 0;
-                    int attack = rand.Next(0, currentPlayer.weaponValue) / 2;
-
-                    WriteLine("You lose " + damage + " health and deal " + attack + " damage");
-                    currentPlayer.health -= damage;
-                    enemy.health -= attack;
-                    ReadKey(true);
+                    Defend(enemy);
                 }
                 else if (input == "r")
                 {
-                    // Run
-                    WriteLine("");
-                    if (rand.Next(0, 2) == 0)
-                    { 
-                        WriteLine("As you sprint away from the " + enemy.name + ", its strike catches you in the back, sending you sprawling onto the ground!");
-                        int damage = enemy.power - currentPlayer.armorValue;
-                        if (damage < 0)
-                            damage = 0;
-                        WriteLine("You lose " + damage + " health and are unable to escape.");
-                        currentPlayer.health -= damage;
-                        ReadKey(true);
-                    }
-                    else
-                    {
-                        WriteLine("You use your crazy mobility to evade the attacks of " + enemy.name + " and you escape!");
-                        ReadKey(true);
-
-                        Shop.RunShop(currentPlayer);
-                    }
+                    Run(enemy);
                 }
                 else if (input == "h")
                 {
-                    // Heal
-                    WriteLine("");
-                    if (currentPlayer.potion == 0)
-                    {
-                        WriteLine("As you desperately grasp for a potion in your bag, all that you can find is empty glass flasks!");
-                        int damage = enemy.power - currentPlayer.armorValue;
-                        if (damage < 0)
-                            damage = 0;
-                        WriteLine("The " + enemy.name + " strikes you with a mighty blow, and you lose " + damage + " health!");
-                    }
-                    else
-                    {
-                        WriteLine("You reach into your bag and pull out a glowing, red flask. You take a swig, you feel your body lighten up.");
-                           int potionV = 5;
-                        WriteLine("You gain " + potionV + " health");
-                        currentPlayer.health += potionV;
-                        WriteLine("As you were occupied, the " + enemy.name + " advanced and struck.");
-                            int damage = (enemy.power /2)-currentPlayer.armorValue;
-                        if(damage<0)
-                            damage=0;
-                        WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
-                        currentPlayer.potion--; 
-                    }
-                    ReadKey(true);
+                    Heal(enemy);
                 }
                 if (currentPlayer.health <= 0)
                 {
@@ -157,6 +94,85 @@ namespace Text_Based_Game
             WriteLine("\nAs you stand victorious over the " + enemy.name + ", it's body dissolves into " + lootCoins + " gold coins!");
             currentPlayer.coins += lootCoins;
             currentPlayer.LevelCheck(enemy.xp);
+            ReadKey(true);
+        }
+
+        public static void Attack(Enemy enemy)
+        {
+            WriteLine("\nYou run forward swinging hoping to hit something! As you pass, the " + enemy.name + " strikes you back!");
+            int damage = enemy.power - currentPlayer.armorValue;
+            if (damage < 0)
+                damage = 0;
+            int attack = rand.Next(0, currentPlayer.weaponValue) + rand.Next(1, 4);
+            WriteLine("You lose " + damage + " health and deal " + attack + " damage");
+            currentPlayer.health -= damage;
+            enemy.health -= attack;
+            ReadKey(true);
+        }
+
+        public static void Defend(Enemy enemy)
+        {
+            WriteLine("\nAs the " + enemy.name + " prepares to strike, you ready your sword in a defensive stance!");
+            int damage = (enemy.power / 4) + 1 - (currentPlayer.armorValue - 1);
+            int attack = 0;
+            if (damage < 0)
+                damage = 0;
+
+            WriteLine("You lose " + damage + " health.");
+            if (rand.Next(1, 11) == 7)
+            {
+                attack = rand.Next(0, currentPlayer.weaponValue + 5) / 2;
+                WriteLine("You get an opportunity to counterattack! The enemy takes " + attack + " damage.");
+            }
+            currentPlayer.health -= damage;
+            enemy.health -= attack;
+            ReadKey(true);
+        }
+
+        public static void Run(Enemy enemy)
+        {
+            if (rand.Next(0, 2) == 0)
+            {
+                WriteLine("\nAs you sprint away from the " + enemy.name + ", its strike catches you in the back, sending you sprawling onto the ground!");
+                int damage = enemy.power - currentPlayer.armorValue;
+                if (damage < 0)
+                    damage = 0;
+                WriteLine("You lose " + damage + " health and are unable to escape.");
+                currentPlayer.health -= damage;
+                ReadKey(true);
+            }
+            else
+            {
+                WriteLine("\nYou use your crazy mobility to evade the attacks of " + enemy.name + " and you escape!");
+                ReadKey(true);
+
+                Shop.RunShop(currentPlayer);
+            }
+        }
+
+        public static void Heal(Enemy enemy)
+        {
+            if (currentPlayer.potion == 0)
+            {
+                WriteLine("\nAs you desperately grasp for a potion in your bag, all that you can find is empty glass flasks!");
+                int damage = enemy.power - currentPlayer.armorValue;
+                if (damage < 0)
+                    damage = 0;
+                WriteLine("The " + enemy.name + " strikes you with a mighty blow, and you lose " + damage + " health!");
+            }
+            else
+            {
+                WriteLine("\nYou reach into your bag and pull out a glowing, red flask. You take a swig, you feel your body lighten up.");
+                int potionV = 5;
+                WriteLine("You gain " + potionV + " health");
+                currentPlayer.health += potionV;
+                WriteLine("As you were occupied, the " + enemy.name + " advanced and struck.");
+                int damage = (enemy.power / 2) - currentPlayer.armorValue;
+                if (damage < 0)
+                    damage = 0;
+                WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
+                currentPlayer.potion--;
+            }
             ReadKey(true);
         }
     }
