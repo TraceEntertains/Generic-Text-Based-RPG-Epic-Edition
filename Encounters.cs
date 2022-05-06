@@ -8,6 +8,7 @@ namespace Text_Based_Game
     public class Encounters
     {
         static Random Rand { get; set; } = new();
+        static int UsedPotions = 0;
 
         // Encounters
 
@@ -90,6 +91,7 @@ namespace Text_Based_Game
             WriteLine("\nAs you stand victorious over the " + enemy.Name + ", it's body dissolves into " + lootCoins + " gold coins!");
             CurrentPlayer.Coins += lootCoins;
             CurrentPlayer.LevelCheck(enemy.XP);
+            UsedPotions = 0;
             ReadKey(true);
         }
 
@@ -159,17 +161,25 @@ namespace Text_Based_Game
             }
             else
             {
-                WriteLine("\nYou reach into your bag and pull out a glowing, red flask. You take a swig, you feel your body lighten up.");
-                int potionV = 5;
-                WriteLine("You gain " + potionV + " health");
-                CurrentPlayer.Health += potionV;
-                WriteLine("As you were occupied, the " + enemy.Name + " advanced and struck.");
-                int damage = (enemy.Power / 2) - CurrentPlayer.ArmorValue;
-                if (damage < 0)
-                    damage = 0;
-                WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
-                CurrentPlayer.Health -= damage;
-                CurrentPlayer.Potion--;
+                if (UsedPotions < 3)
+                {
+                    WriteLine("\nYou reach into your bag and pull out a glowing, red flask. You take a swig, you feel your body lighten up.");
+                    int potionV = 5;
+                    WriteLine("You gain " + potionV + " health");
+                    CurrentPlayer.Health += potionV;
+                    WriteLine("As you were occupied, the " + enemy.Name + " advanced and struck.");
+                    int damage = (enemy.Power / 2) - CurrentPlayer.ArmorValue;
+                    if (damage < 0)
+                        damage = 0;
+                    WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
+                    CurrentPlayer.Health -= damage;
+                    CurrentPlayer.Potion--;
+                    UsedPotions += 1;
+                }
+                else
+                {
+                    WriteLine("\nThe thought about drinking another potion sickens you.");
+                }
             }
             ReadKey(true);
         }
