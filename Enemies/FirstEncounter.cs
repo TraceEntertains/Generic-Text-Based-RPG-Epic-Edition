@@ -1,29 +1,27 @@
 ﻿using System;
 using static System.Console;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Text_Based_Game.Enemies
 {
     public class FirstEncounter : Enemy
     {
-        new public void StartBattle()
+        public static Random Rand { get; set; } = new();
+
+        public override string Name { get; set; } = "Slime";
+        public override int Power { get; set; } = 1;
+        public override int Health { get; set; } = 4;
+        public override int CoinBonus { get; set; } = 0;
+        public override int XP { get; set; } = Rand.Next(3, 5);
+        public override bool IsBoss { get; set; } = false;
+
+        public override void StartBattle()
         {
-            Name = "Slime";
-            Power = 1;
-            Health = 4;
-            xp = rand.Next(3, 5);
-
             PreBattle();
-
             Encounters.Combat(this);
-
             PostBattle();
         }
 
-        new public void PreBattle()
+        public override void PreBattle()
         {
             WriteLine("You see the creature start hopping towards you. You pick up a stick just to be safe.");
             WriteLine("The creature leaps towards you in a fearocious fashion.");
@@ -31,7 +29,7 @@ namespace Text_Based_Game.Enemies
             ReadKey();
         }
 
-        new public void PostBattle(bool bonusCoins = false, int coinBonus = 0)
+        public override void PostBattle(bool bonusCoins = false, int coinBonus = 0)
         {
 
         }

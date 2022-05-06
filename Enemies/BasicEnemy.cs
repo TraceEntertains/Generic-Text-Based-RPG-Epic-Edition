@@ -1,43 +1,41 @@
 ﻿using System;
 using static System.Console;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Text_Based_Game.Enemies
 {
     public class BasicEnemy : Enemy
     {
-        new public void StartBattle()
+        public static Random Rand { get; set; } = new();
+
+        public override string Name { get; set; } = GetName();
+        public override int Power { get; set; } = Program.CurrentPlayer.GetPower();
+        public override int Health { get; set; } = Program.CurrentPlayer.GetPower();
+        public override int CoinBonus { get; set; } = 0;
+        public override int XP { get; set; } = Rand.Next(3, 5);
+        public override bool IsBoss { get; set; } = false;
+
+        public override void StartBattle()
         {
-            Name = GetName();
-            Power = Program.currentPlayer.GetPower();
-            Health = Program.currentPlayer.GetPower();
-            xp = rand.Next(3, 5);
-
             PreBattle();
-
             Encounters.Combat(this);
-
             PostBattle();
         }
 
-        new public void PreBattle()
+        public override void PreBattle()
         {
             Clear();
             WriteLine("You walk around the great plains and find a monster!");
             ReadKey();
         }
 
-        new public void PostBattle(bool bonusCoins = false, int coinBonus = 0)
+        public override void PostBattle(bool bonusCoins = false, int coinBonus = 0)
         {
 
         }
 
-        public string GetName()
+        public static string GetName()
         {
-            switch (rand.Next(0, 4))
+            switch (Rand.Next(0, 4))
             {
                 //Add More Enemies Later
                 case 0:
@@ -48,6 +46,8 @@ namespace Text_Based_Game.Enemies
                     return "Low Class Demon";
                 case 3:
                     return "Demon Bunny";
+                default:
+                    break;
             }
             return "Bandit";
         }

@@ -2,10 +2,6 @@
 using Text_Based_Game.Enemies;
 using static System.Console;
 using static Text_Based_Game.Program;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Text_Based_Game
 {

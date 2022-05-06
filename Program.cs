@@ -1,10 +1,6 @@
 ﻿using System;
 using static System.Console;
 using Text_Based_Game.Enemies;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace Text_Based_Game
@@ -16,7 +12,7 @@ namespace Text_Based_Game
         public static string AppDataFolderName { get; set; } = "\\GTBRPGEE";
         public static string FullPath { get; set; }
         public static bool MainLoop { get; set; } = true;
-        static void Main(string[] args)
+        static void Main()
         {
             Start();
 

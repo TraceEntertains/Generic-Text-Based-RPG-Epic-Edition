@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Generic_Text_Based_RPG_Epic_Edition.Items
+﻿namespace Generic_Text_Based_RPG_Epic_Edition.Items
 {
     public class ExampleItem : Item
     {
-        new public void DefineItemVars()
-        {
-            Name = "Example Item";
-            Damage = 30;
-            Bonus = 1.3;
-        }
+        public override string Name { get; set; } = "Example Item";
+        public override int Damage { get; set; } = 30;
+        public override double Bonus { get; set; } = 1.3;
     }
 }
