@@ -1,7 +1,7 @@
 ﻿using System;
 using static System.Console;
 
-namespace Text_Based_Game
+namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Shop
     {
@@ -24,7 +24,7 @@ namespace Text_Based_Game
                 WriteLine("=====================");
                 WriteLine("Coins: " + player.Coins);
                 WriteLine("=====================");
-                WriteLine("(W)eapon:          $" + weaponPlayer);
+                //WriteLine("(W)eapon:          $" + weaponPlayer);
                 WriteLine("(A)rmor            $" + armorPlayer);
                 WriteLine("(P)otions:         $" + potionPlayer);
                 WriteLine("(D)ifficulty Mod:  $" + diffPlayer);
@@ -39,10 +39,10 @@ namespace Text_Based_Game
                 {
                     TryBuy("potion", potionPlayer, player);
                 }
-                else if (input == "w")
+                /*else if (input == "w")
                 {
                     TryBuy("weapon", weaponPlayer, player);
-                }
+                }*/
                 else if (input == "a")
                 {
                     TryBuy("armor", armorPlayer, player);
@@ -74,7 +74,7 @@ namespace Text_Based_Game
                 if (item == "potion")
                     player.Potion++;
                 else if (item == "weapon")
-                    player.WeaponValue++;
+                    player.CurrentWeapon.Damage++;
                 else if (item == "armor")
                     player.ArmorValue++;
                 else if (item == "diff")
@@ -99,11 +99,20 @@ namespace Text_Based_Game
                 WriteLine("    Player Stats     ");
                 WriteLine("=====================");
                 WriteLine("Player Name: " + player.Name);
-                WriteLine("Current Health: " + player.Health);
                 WriteLine("Coins: " + player.Coins);
-                WriteLine("Weapon Strength: " + player.WeaponValue);
+                WriteLine("Current Health: " + player.Health);
+                WriteLine("Strength: " + player.Strength);
+                WriteLine("Defense: " + player.Defense);
+                WriteLine("=====================");
+                WriteLine("Current Weapon: " + player.CurrentWeapon.Name);
+                WriteLine("Weapon Strength: " + player.CurrentWeapon.Damage);
                 WriteLine("Armor Defense: " + player.ArmorValue);
                 WriteLine("Potions: " + player.Potion);
+                WriteLine("=====================");
+                WriteLine("Level: " + player.Level);
+                WriteLine("XP: " + player.XP);
+                WriteLine("Next Level: " + player.NextLevel);
+                WriteLine("=====================");
                 WriteLine("Difficulty Mods: " + player.Mods);
                 WriteLine("=====================");
                 WriteLine("(B)ack");

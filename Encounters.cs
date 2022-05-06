@@ -1,9 +1,12 @@
 ﻿using System;
-using Text_Based_Game.Enemies;
+using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
+using Generic_Text_Based_RPG_Epic_Edition.Enemies;
 using static System.Console;
-using static Text_Based_Game.Program;
+using static Generic_Text_Based_RPG_Epic_Edition.Program;
+using org.mariuszgromada.math.mxparser;
+using System.Data;
 
-namespace Text_Based_Game
+namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Encounters
     {
@@ -17,8 +20,16 @@ namespace Text_Based_Game
             Clear();
             if (Rand.Next(0,21) == 1)
             {
-                SlimeKing slimeKing = new();
-                slimeKing.StartBattle();
+                if (CurrentPlayer.Level >= 20)
+                {
+                    SlimeKing slimeKing = new();
+                    slimeKing.StartBattle();
+                }
+                else
+                {
+                    Slime slime = new();
+                    slime.StartBattle();
+                }
             }
             else
             {
@@ -55,7 +66,7 @@ namespace Text_Based_Game
             {
                 Clear();
                 WriteLine(enemy.Name);
-                WriteLine(enemy.Power + " Attack" + " / " + enemy.Health + " Health");
+                WriteLine(enemy.Power + " Attack" + " / " + enemy.Health + " Health" + " / " + enemy.Defense + " Defense");
                 WriteLine("\n=====================");
                 WriteLine("| (A)ttack (D)efend |");
                 WriteLine("|   (R)un   (H)eal  |");
@@ -98,10 +109,12 @@ namespace Text_Based_Game
         public static void Attack(Enemy enemy)
         {
             WriteLine("\nYou run forward swinging hoping to hit something! As you pass, the " + enemy.Name + " strikes you back!");
-            int damage = enemy.Power - CurrentPlayer.ArmorValue;
+            int damage = enemy.Power - (CurrentPlayer.ArmorValue + CurrentPlayer.Defense + Rand.Next(1, 4));
             if (damage < 0)
                 damage = 0;
-            int attack = Rand.Next(0, CurrentPlayer.WeaponValue) + Rand.Next(1, 4);
+            int attack = Rand.Next(0, CurrentPlayer.CurrentWeapon.Damage + CurrentPlayer.Strength) + Rand.Next(1, 4) - enemy.Defense;
+            if (attack < 0)
+                attack = 1;
             WriteLine("You lose " + damage + " health and deal " + attack + " damage");
             CurrentPlayer.Health -= damage;
             enemy.Health -= attack;
@@ -111,7 +124,7 @@ namespace Text_Based_Game
         public static void Defend(Enemy enemy)
         {
             WriteLine("\nAs the " + enemy.Name + " prepares to strike, you ready your sword in a defensive stance!");
-            int damage = (enemy.Power / 4) + 1 - (CurrentPlayer.ArmorValue - 1);
+            int damage = (enemy.Power / 4) + 1 - (CurrentPlayer.ArmorValue - 1 + CurrentPlayer.Defense + Rand.Next(1, 4));
             int attack = 0;
             if (damage < 0)
                 damage = 0;
@@ -119,7 +132,7 @@ namespace Text_Based_Game
             WriteLine("You lose " + damage + " health.");
             if (Rand.Next(1, 11) == 7)
             {
-                attack = Rand.Next(0, CurrentPlayer.WeaponValue + 5) / 2;
+                attack = Rand.Next(3, CurrentPlayer.CurrentWeapon.Damage + CurrentPlayer.Strength + 5) - enemy.Defense;
                 WriteLine("You get an opportunity to counterattack! The enemy takes " + attack + " damage.");
             }
             CurrentPlayer.Health -= damage;
@@ -132,7 +145,7 @@ namespace Text_Based_Game
             if (Rand.Next(0, 2) == 0)
             {
                 WriteLine("\nAs you sprint away from the " + enemy.Name + ", its strike catches you in the back, sending you sprawling onto the ground!");
-                int damage = enemy.Power - CurrentPlayer.ArmorValue;
+                int damage = enemy.Power - (CurrentPlayer.ArmorValue + CurrentPlayer.Defense + Rand.Next(1, 4));
                 if (damage < 0)
                     damage = 0;
                 WriteLine("You lose " + damage + " health and are unable to escape.");
@@ -153,7 +166,7 @@ namespace Text_Based_Game
             if (CurrentPlayer.Potion == 0)
             {
                 WriteLine("\nAs you desperately grasp for a potion in your bag, all that you can find is empty glass flasks!");
-                int damage = enemy.Power - CurrentPlayer.ArmorValue;
+                int damage = enemy.Power - (CurrentPlayer.ArmorValue + CurrentPlayer.Defense + Rand.Next(1, 4));
                 if (damage < 0)
                     damage = 0;
                 WriteLine("The " + enemy.Name + " strikes you with a mighty blow, and you lose " + damage + " health!");
@@ -168,7 +181,7 @@ namespace Text_Based_Game
                     WriteLine("You gain " + potionV + " health");
                     CurrentPlayer.Health += potionV;
                     WriteLine("\nAs you were occupied, the " + enemy.Name + " advanced and struck.");
-                    int damage = (enemy.Power / 2) - CurrentPlayer.ArmorValue;
+                    int damage = (enemy.Power / 2) - (CurrentPlayer.ArmorValue + CurrentPlayer.Defense + Rand.Next(1, 4));
                     if (damage < 0)
                         damage = 0;
                     WriteLine("You lose " + damage + " health. \n\nOne Potion Consumed.");

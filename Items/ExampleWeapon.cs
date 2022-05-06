@@ -1,6 +1,8 @@
-﻿namespace Generic_Text_Based_RPG_Epic_Edition.Items
+﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
+
+namespace Generic_Text_Based_RPG_Epic_Edition.Items
 {
-    public class ExampleItem : Item
+    public class ExampleWeapon : Weapon
     {
         public override string Name { get; set; } = "Example Item";
         public override int Damage { get; set; } = 30;

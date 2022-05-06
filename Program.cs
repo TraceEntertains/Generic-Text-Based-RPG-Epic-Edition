@@ -1,9 +1,9 @@
 ﻿using System;
 using static System.Console;
-using Text_Based_Game.Enemies;
+using Generic_Text_Based_RPG_Epic_Edition.Enemies;
 using System.IO;
 
-namespace Text_Based_Game
+namespace Generic_Text_Based_RPG_Epic_Edition
 {
     internal class Program
     {

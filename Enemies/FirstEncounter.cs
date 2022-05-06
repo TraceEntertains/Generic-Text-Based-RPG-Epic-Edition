@@ -1,12 +1,14 @@
-﻿using static System.Console;
+﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
+using static System.Console;
 
-namespace Text_Based_Game.Enemies
+namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
 {
     public class FirstEncounter : Enemy
     {
         public override string Name { get; set; } = "Slime";
-        public override int Power { get; set; } = 1;
+        public override int Power { get; set; } = 3;
         public override int Health { get; set; } = 4;
+        public override int Defense { get; set; } = 2;
         public override int CoinBonus { get; set; } = 0;
         public override int XP { get; set; } = Rand.Next(1, 4);
         public override bool IsBoss { get; set; } = false;

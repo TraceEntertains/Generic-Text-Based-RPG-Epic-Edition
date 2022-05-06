@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text.Json;
 
-namespace Text_Based_Game
+namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class SaveManager
     {

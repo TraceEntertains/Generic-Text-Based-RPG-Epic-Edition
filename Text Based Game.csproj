@@ -40,6 +40,12 @@
     <Reference Include="Costura, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Costura.Fody.5.7.0\lib\netstandard1.0\Costura.dll</HintPath>
     </Reference>
+    <Reference Include="MathParser, Version=1.0.8.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MathosParser.1.0.8.1\lib\MathParser.dll</HintPath>
+    </Reference>
+    <Reference Include="MathParser.org-mXparser, Version=5.0.2.0, Culture=neutral, PublicKeyToken=0fbab7add73ed6e2, processorArchitecture=MSIL">
+      <HintPath>packages\MathParser.org-mXparser.5.0.2\lib\net472\MathParser.org-mXparser.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -213,9 +219,10 @@
     <Compile Include="Enemies\SkeletonArcher.cs" />
     <Compile Include="Enemies\Slime.cs" />
     <Compile Include="Enemies\SlimeKing.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Items\ExampleItem.cs" />
+    <Compile Include="BaseClasses\Enemy.cs" />
+    <Compile Include="BaseClasses\Weapon.cs" />
+    <Compile Include="Items\Stick.cs" />
+    <Compile Include="Items\ExampleWeapon.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

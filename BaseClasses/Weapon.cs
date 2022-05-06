@@ -1,6 +1,6 @@
-﻿namespace Generic_Text_Based_RPG_Epic_Edition
+﻿namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
 {
-    public abstract class Item
+    public abstract class Weapon
     {
         public abstract string Name { get; set; }
         public abstract int Damage { get; set; }

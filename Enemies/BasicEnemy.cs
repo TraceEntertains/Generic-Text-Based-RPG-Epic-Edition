@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
+using System;
 using static System.Console;
 
-namespace Text_Based_Game.Enemies
+namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
 {
     public class BasicEnemy : Enemy
     {
         public override string Name { get; set; } = GetName();
         public override int Power { get; set; } = Program.CurrentPlayer.GetPower();
-        public override int Health { get; set; } = Program.CurrentPlayer.GetPower();
+        public override int Health { get; set; } = Program.CurrentPlayer.GetHealth();
+        public override int Defense { get; set; } = Program.CurrentPlayer.GetDefense();
         public override int CoinBonus { get; set; } = 0;
         public override int XP { get; set; } = Rand.Next(1, 4);
         public override bool IsBoss { get; set; } = false;
