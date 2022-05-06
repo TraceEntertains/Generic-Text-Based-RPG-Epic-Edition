@@ -167,11 +167,11 @@ namespace Text_Based_Game
                     int potionV = 5;
                     WriteLine("You gain " + potionV + " health");
                     CurrentPlayer.Health += potionV;
-                    WriteLine("As you were occupied, the " + enemy.Name + " advanced and struck.");
+                    WriteLine("\nAs you were occupied, the " + enemy.Name + " advanced and struck.");
                     int damage = (enemy.Power / 2) - CurrentPlayer.ArmorValue;
                     if (damage < 0)
                         damage = 0;
-                    WriteLine("You lose " + damage + " health. \nOne Potion Consumed.");
+                    WriteLine("You lose " + damage + " health. \n\nOne Potion Consumed.");
                     CurrentPlayer.Health -= damage;
                     CurrentPlayer.Potion--;
                     UsedPotions += 1;
