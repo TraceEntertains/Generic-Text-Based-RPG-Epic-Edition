@@ -213,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\Item.cs" />
     <Compile Include="Encounters.cs" />
     <Compile Include="Enemies\BasicEnemy.cs" />
     <Compile Include="Enemies\FirstEncounter.cs" />

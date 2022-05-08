@@ -2,6 +2,7 @@
 using org.mariuszgromada.math.mxparser;
 using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using Generic_Text_Based_RPG_Epic_Edition.Items;
+using System.Text.Json.Serialization;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
@@ -15,7 +16,13 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public int Strength { get; set; } = 1; // Default Damage = 1
         public int Defense { get; set; } = 1;
 
-        public Weapon CurrentWeapon { get; set; } = new Stick();
+        [JsonIgnore]
+        public Weapon CurrentWeapon { get; set; }
+
+#nullable enable
+        public int? CurrentWeaponID { get; set; }
+#nullable disable
+
         public int ArmorValue { get; set; } = 0;
         public int Potion { get; set; } = 5;
 
@@ -59,14 +66,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
             XP += newxp;
             NextLevel -= newxp;
-            Console.WriteLine(XP + " " + NextLevel + " " + newxp);
+
             if (NextLevel <= 0)
             {
                 while (NextLevel < 0)
                 {
                     nextLevelCalc = XP - ((5 * (Level + 1) ^ 3) / 4) - ((5 * (Level - 1) ^ 3) / 4);
 
-                    NextLevel += ((5 * Level) ^ 3) / 4;
+                    NextLevel += nextLevelCalc;
                     Console.WriteLine(NextLevel);
                     LevelUp();
                 }

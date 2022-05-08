@@ -1,19 +1,29 @@
 ﻿using System;
 using static System.Console;
 using Generic_Text_Based_RPG_Epic_Edition.Enemies;
+using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using System.IO;
+using Generic_Text_Based_RPG_Epic_Edition.Items;
+using System.Text.Json.Serialization;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
     internal class Program
     {
+        [JsonInclude]
         public static Player CurrentPlayer { get; set; } = new Player();
+
+        [JsonInclude]
+        public static Enemy CurrentEnemy { get; set; }
+
         public static string AppDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static string AppDataFolderName { get; set; } = "\\GTBRPGEE";
         public static string FullPath { get; set; }
         public static bool MainLoop { get; set; } = true;
         static void Main()
         {
+            CurrentPlayer.CurrentWeapon = new Stick();
+
             Start();
 
             FirstEncounter firstEncounter = new();

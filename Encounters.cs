@@ -10,6 +10,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Encounters
     {
+        public static Enemy CurrentEnemy { get; set; }
         static Random Rand { get; set; } = new();
         static int UsedPotions = 0;
 
@@ -61,6 +62,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         public static void Combat(Enemy enemy)
         {
+            CurrentEnemy = enemy;
 
             while (enemy.Health > 0)
             {
@@ -92,6 +94,8 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 }
                 if (CurrentPlayer.Health <= 0)
                 {
+                    CurrentEnemy = enemy;
+
                     WriteLine("\nAs the " + enemy.Name + " strikes you it hits with a fatal blow!");
                     ReadKey(true);
                     System.Environment.Exit(0);
@@ -157,6 +161,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 WriteLine("\nYou use your crazy mobility to evade the attacks of " + enemy.Name + " and you escape!");
                 ReadKey(true);
 
+                CurrentEnemy = enemy;
                 Shop.RunShop(CurrentPlayer);
             }
         }

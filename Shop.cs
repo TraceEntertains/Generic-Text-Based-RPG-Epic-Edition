@@ -61,6 +61,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 }
                 else if (input == "q")
                 {
+                    Program.CurrentPlayer.CurrentWeaponID = Program.CurrentPlayer.CurrentWeapon.ID;
                     SaveManager.SaveGame(Program.CurrentPlayer);
                     Environment.Exit(0);
                 }
@@ -116,14 +117,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 WriteLine("Difficulty Mods: " + player.Mods);
                 WriteLine("=====================");
                 WriteLine("(B)ack");
-                WriteLine("(E)xit");
                 WriteLine("=====================");
 
                 string input = ReadKey(true).Key.ToString().ToLower();
                 if (input == "b")
                     break;
-                else if (input == "e")
-                    Encounters.RandomEncounter();
             }
         }
     }
