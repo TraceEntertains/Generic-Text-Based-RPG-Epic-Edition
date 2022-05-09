@@ -33,7 +33,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
             e.Defense = se.Defense;
             e.CoinBonus = se.CoinBonus;
             e.XP = se.XP;
-            Rand = se.Rand;
             return e;
         }
 

@@ -30,7 +30,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public static implicit operator Player(SavePlayer sp)
         {
             Player p = new();
-            Rand = sp.Rand;
             p.Name = sp.Name;
             p.Coins = sp.Coins;
             p.Health = sp.Health;

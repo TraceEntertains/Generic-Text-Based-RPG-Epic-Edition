@@ -102,6 +102,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("|   (R)un   (H)eal  |", 10);
                 Print("=====================", 10);
                 Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health, 10);
+                System.Threading.Thread.Sleep(SleepTime);
                 while (true)
                 {
                     string input = ReadKey(true).Key.ToString().ToLower();
@@ -144,6 +145,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             int lootCoins = CurrentPlayer.CoinCalc();
             TextSkip = false;
             Print("\nAs you stand victorious over the " + enemy.Name + ", it's body dissolves into " + lootCoins + " gold coins!");
+            System.Threading.Thread.Sleep(300);
             CurrentPlayer.Coins += lootCoins;
             CurrentPlayer.LevelCheck(enemy.XP);
             UsedPotions = 0;

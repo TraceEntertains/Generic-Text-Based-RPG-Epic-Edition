@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.Items
 {
-    public class SlimeSword : Generic_Text_Based_RPG_Epic_Edition.BaseClasses.Weapon
+    public class SlimeSword : Weapon
     {
         public override int ID { get; set; } = 2;
 
