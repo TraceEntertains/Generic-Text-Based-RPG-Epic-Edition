@@ -27,6 +27,26 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         public int Mods { get; set; } = 0;
 
+        public static implicit operator Player(SavePlayer sp)
+        {
+            Player p = new();
+            Rand = sp.Rand;
+            p.Name = sp.Name;
+            p.Coins = sp.Coins;
+            p.Health = sp.Health;
+            p.Strength = sp.Strength;
+            p.Defense = sp.Defense;
+            p.CurrentWeapon = sp.CurrentWeapon;
+            p.ArmorValue = sp.ArmorValue;
+            p.Potion = sp.Potion;
+            p.NextLevel = sp.NextLevel;
+            p.Level = sp.Level;
+            p.XP = sp.XP;
+            p.Mods = sp.Mods;
+
+            return p;
+        }
+
         public int GetHealth()
         {
             int upper = 2 * Mods + 5;

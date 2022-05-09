@@ -43,5 +43,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
             }
             return null;
         }
+
+        public static implicit operator Weapon(SaveWeapon sw)
+        {
+            Weapon w = GetByID(sw.ID);
+            return w;
+        }
     }
 }

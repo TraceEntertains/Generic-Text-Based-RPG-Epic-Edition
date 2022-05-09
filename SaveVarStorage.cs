@@ -12,7 +12,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
     public struct SaveEnemy
     {
-        public string Name { get; set; }
         public int Power { get; set; }
         public int Health { get; set; }
         public int Defense { get; set; }
@@ -38,7 +37,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
     public struct SavePlayer
     {
-        public static Random Rand { get; set; }
+        public Random Rand { get; set; }
 
         public string Name { get; set; }
         public int Coins { get; set; }
@@ -56,10 +55,38 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public int XP { get; set; }
 
         public int Mods { get; set; }
+
+        public static implicit operator SavePlayer(Player p)
+        {
+            SavePlayer sp = new();
+            sp.Rand = Player.Rand;
+            sp.Name = p.Name;
+            sp.Coins = p.Coins;
+            sp.Health = p.Health;
+            sp.Strength = p.Strength;
+            sp.Defense = p.Defense;
+            sp.CurrentWeapon = p.CurrentWeapon;
+            sp.ArmorValue = p.ArmorValue;
+            sp.Potion = p.Potion;
+            sp.NextLevel = p.NextLevel;
+            sp.Level = p.Level;
+            sp.XP = p.XP;
+            sp.Mods = p.Mods;
+
+            return sp;
+        }
     }
 
     public struct SaveWeapon
     {
+        public int ID { get; set; }
 
+        public static implicit operator SaveWeapon(Weapon w)
+        {
+            SaveWeapon sw = new();
+            sw.ID = w.ID;
+
+            return sw;
+        }
     }
 }
