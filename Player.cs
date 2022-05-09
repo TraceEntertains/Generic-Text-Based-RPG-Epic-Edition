@@ -109,6 +109,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Health += temphealth;
             Potion += temppotion;
             Defense += tempdefense;
+            if (NextLevel > 0)
+            {
+                Console.WriteLine("You need " + NextLevel + " XP to get to the next level.");
+            }
         }
     }
 }
