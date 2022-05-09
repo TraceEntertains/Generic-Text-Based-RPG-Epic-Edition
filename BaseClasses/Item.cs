@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
     public abstract class Item
     {
         [JsonIgnore]
-        public static List<Item> Items { get; set; } = new();
+        public static Dictionary<int, (Type Type, Func<Item> Creator)> Items { get; set; } = new();
 
         public enum ItemTypes
         {
@@ -18,23 +20,33 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
             Weapon
         }
 
-        public Item()
-        {
-            Items.Add(this);
-        }
-
         public abstract ItemTypes ItemType { get; set; }
         public abstract string Name { get; set; }
         public abstract int ID { get; set; }
 
+        public static void RuntimeGetChildren()
+        {
+            Items = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(t => typeof(Item).IsAssignableFrom(t) && !t.IsAbstract)
+            .Select(t =>
+            {
+                var ctor = t.GetConstructor(Array.Empty<Type>());
+                var expr = Expression.New(ctor);
+                var lambda = Expression.Lambda<Func<Item>>(expr).Compile();
+                var placeholder = lambda();
+
+                return (ID: placeholder.ID, Type: t, Creator: lambda);
+            })
+            .ToDictionary(p => p.ID, p => (p.Type, p.Creator));
+        }
+
         public static Item GetByID(int id)
         {
-            foreach (var item in Items)
+            if (Items.TryGetValue(id, out (Type Type, Func<Item> Creator) value))
             {
-                if (item.ID == id)
-                {
-                    return item;
-                }
+                Item item = value.Creator.Invoke();
+                return item;
             }
             return null;
         }

@@ -10,19 +10,12 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class SaveManager
     {
-        public static SaveVarStorage LoadGame()
+        public static SaveVarStorage SaveVarStorage(SaveVarStorage saveVarStorage)
         {
-            FileStream save = File.OpenRead(Program.FullPath + "\\save.json");
+            saveVarStorage.Player = Program.CurrentPlayer;
+            saveVarStorage.Enemy = Program.CurrentEnemy;
 
-            // Restore weapon
-
-            SaveVarStorage saveVarStorage = JsonSerializer.Deserialize<SaveVarStorage>(save);
-            saveVarStorage.Player.CurrentWeapon = (Weapon)Item.GetByID(saveVarStorage.PlayerWeaponID);
-
-            // Restore enemy data
-            saveVarStorage.Enemy = LoadEnemyStats(saveVarStorage);
-
-            save.Close();
+            saveVarStorage.PlayerWeaponID = Program.CurrentPlayer.CurrentWeapon.ID;
 
             return saveVarStorage;
         }
@@ -33,43 +26,25 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Program.CurrentEnemy = saveVarStorage.Enemy;
         }
 
-        public static EnemyStatsStruct SaveEnemyStats(Enemy enemy)
-        {
-            EnemyStatsStruct enemyStatsStruct = new();
-
-            enemyStatsStruct.Health = enemy.Health;
-            enemyStatsStruct.Defense = enemy.Defense;
-            enemyStatsStruct.CoinBonus = enemy.CoinBonus;
-            enemyStatsStruct.Power = enemy.Power;
-            enemyStatsStruct.XP = enemy.XP;
-
-            return enemyStatsStruct;
-        }
-
-        public static Enemy LoadEnemyStats(SaveVarStorage saveVarStorage)
-        {
-            Enemy temp = Enemy.GetByID(saveVarStorage.EnemyID);
-
-            temp.Health = saveVarStorage.EnemyStats.Health;
-            temp.Defense = saveVarStorage.EnemyStats.Defense;
-            temp.CoinBonus = saveVarStorage.EnemyStats.CoinBonus;
-            temp.Power = saveVarStorage.EnemyStats.Power;
-            temp.XP = saveVarStorage.EnemyStats.XP;
-
-            return temp;
-        }
-
         public static void SaveGame(SaveVarStorage saveVarStorage)
         {
-            saveVarStorage.Player = Program.CurrentPlayer;
-            saveVarStorage.Enemy = Program.CurrentEnemy;
-
-            saveVarStorage.PlayerWeaponID = Program.CurrentPlayer.CurrentWeapon.ID;
-            saveVarStorage.EnemyID = Program.CurrentEnemy.ID;
-
-            saveVarStorage.EnemyStats = SaveEnemyStats(Program.CurrentEnemy);
+            saveVarStorage = SaveVarStorage(saveVarStorage);
 
             File.WriteAllText(Program.FullPath + "\\save.json", JsonSerializer.Serialize(saveVarStorage));
+        }
+
+        public static SaveVarStorage LoadGame()
+        {
+            FileStream save = File.OpenRead(Program.FullPath + "\\save.json");
+
+            SaveVarStorage saveVarStorage = JsonSerializer.Deserialize<SaveVarStorage>(save);
+            saveVarStorage.Player.CurrentWeapon = (Weapon)Item.GetByID(saveVarStorage.PlayerWeaponID);
+
+            LoadVarStorage(saveVarStorage);
+
+            save.Close();
+
+            return saveVarStorage;
         }
     }
 }

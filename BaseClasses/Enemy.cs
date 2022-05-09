@@ -1,6 +1,9 @@
 ﻿using Generic_Text_Based_RPG_Epic_Edition.Enemies;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
 {
@@ -17,37 +20,48 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
 
         public static Random Rand { get; set; } = new();
 
-        public static List<Enemy> Enemies { get; set; } = new();
+        public static Dictionary<int, (Type Type, Func<Enemy> Creator)> Enemies { get; set; } = new();
 
         public abstract void StartBattle();
         public abstract void PreBattle();
+
+        public static implicit operator Enemy(SaveEnemy se)
+        {
+            Enemy e = GetByID(se.ID);
+            e.Power = se.Power;
+            e.Health = se.Health;
+            e.Defense = se.Defense;
+            e.CoinBonus = se.CoinBonus;
+            e.XP = se.XP;
+            Rand = se.Rand;
+            return e;
+        }
+
         public abstract void PostBattle(bool bonusCoins = false, int coinBonus = 0);
 
-        public Enemy()
+        public static void RuntimeGetChildren()
         {
-            Enemies.Add(this);
+            Enemies = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(t => typeof(Enemy).IsAssignableFrom(t) && !t.IsAbstract)
+            .Select(t =>
+            {
+                var ctor = t.GetConstructor(Array.Empty<Type>());
+                var expr = Expression.New(ctor);
+                var lambda = Expression.Lambda<Func<Enemy>>(expr).Compile();
+                var placeholder = lambda();
+
+                return (ID: placeholder.ID, Type: t, Creator: lambda);
+            })
+            .ToDictionary(p => p.ID, p => (p.Type, p.Creator));
         }
 
         public static Enemy GetByID(int id)
         {
-            List<Enemy> EnemiesLocal = new();
-            FirstEncounter fe = new();
-            BasicEnemy be = new();
-            SkeletonArcher sa = new();
-            Slime s = new();
-            SlimeKing sk = new();
-            EnemiesLocal.Add(fe);
-            EnemiesLocal.Add(be);
-            EnemiesLocal.Add(sa);
-            EnemiesLocal.Add(s);
-            EnemiesLocal.Add(sk);
-
-            foreach (var enemy in EnemiesLocal)
+            if (Enemies.TryGetValue(id, out (Type Type, Func<Enemy> Creator) value))
             {
-                if (enemy.ID == id)
-                {
-                    return enemy;
-                }
+                Enemy enemy = value.Creator.Invoke();
+                return enemy;
             }
             return null;
         }

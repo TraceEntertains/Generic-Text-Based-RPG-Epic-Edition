@@ -5,6 +5,10 @@ using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using System.IO;
 using Generic_Text_Based_RPG_Epic_Edition.Items;
 using System.Text.Json.Serialization;
+using System.Reflection;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
@@ -19,8 +23,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public static bool MainLoop { get; set; } = true;
         static void Main()
         {
-            CurrentPlayer.CurrentWeapon = new Stick();
-
             Start();
 
             while (MainLoop)
@@ -31,6 +33,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         static void Start()
         {
+            Enemy.RuntimeGetChildren();
+            Weapon.RuntimeGetChildren();
+            Item.RuntimeGetChildren();
+
             if (Directory.Exists(AppDataDirectory + AppDataFolderName) == false)
                 Directory.CreateDirectory(AppDataDirectory + AppDataFolderName);
             FullPath = AppDataDirectory + AppDataFolderName;
@@ -66,6 +72,8 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         static void NewGame()
         {
+            CurrentPlayer.CurrentWeapon = new Stick();
+
             Clear();
             WriteLine("Generic Text Based RPG - Epic Edition\n");
             Write("Name (Optional): ");

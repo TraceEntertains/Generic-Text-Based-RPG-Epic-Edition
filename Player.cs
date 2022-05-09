@@ -8,7 +8,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Player
     {
-        Random Rand { get; set; } = new Random();
+        public static Random Rand { get; set; } = new Random();
 
         public string Name { get; set; }
         public int Coins { get; set; } = 0;
@@ -16,7 +16,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public int Strength { get; set; } = 1; // Default Damage = 1
         public int Defense { get; set; } = 1;
 
-        [JsonIgnore]
         public Weapon CurrentWeapon { get; set; }
 
         public int ArmorValue { get; set; } = 0;
