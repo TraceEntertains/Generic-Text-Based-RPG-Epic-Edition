@@ -224,7 +224,7 @@
     <Compile Include="Enemies\SlimeKing.cs" />
     <Compile Include="BaseClasses\Enemy.cs" />
     <Compile Include="BaseClasses\Weapon.cs" />
-    <Compile Include="Items\Slime Sword.cs" />
+    <Compile Include="Items\SlimeSword.cs" />
     <Compile Include="Items\Stick.cs" />
     <Compile Include="Items\ExampleWeapon.cs" />
     <Compile Include="Player.cs" />

@@ -9,22 +9,13 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Encounters
     {
+        public static int SleepTime = 50;
+
         public static bool TextSkip = false;
         static Random Rand { get; set; } = new();
         static int UsedPotions = 0;
 
-        public static bool IsAnyKeyDown()
-        {
-            var values = Enum.GetValues(typeof(Key));
-
-            foreach (var v in values)
-                if (((Key)v) != Key.None && Keyboard.IsKeyDown((Key)v))
-                    return true;
-
-            return false;
-        }
-
-        public static void Print(string text, int msgap = 30)
+        public static void Print(string text, int msgap = 20)
         {
             var remaining = text;
             if (TextSkip == false)
@@ -35,7 +26,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     remaining = remaining.Remove(0, 1);
 
                     System.Threading.Thread.Sleep(msgap);
-                    if (IsAnyKeyDown())
+                    if (Keyboard.IsKeyDown(Key.Enter))
                     {
                         Write(remaining);
 
@@ -101,6 +92,8 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
             while (enemy.Health > 0)
             {
+                TextSkip = false;
+                System.Threading.Thread.Sleep(SleepTime);
                 Clear();
                 Print(enemy.Name, 10);
                 Print(enemy.Power + " Attack" + " / " + enemy.Health + " Health" + " / " + enemy.Defense + " Defense", 10);
@@ -108,47 +101,52 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("| (A)ttack (D)efend |", 10);
                 Print("|   (R)un   (H)eal  |", 10);
                 Print("=====================", 10);
-                Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health);
+                Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health, 10);
                 while (true)
                 {
                     string input = ReadKey(true).Key.ToString().ToLower();
+                    System.Threading.Thread.Sleep(SleepTime);
                     if (input == "a")
                     {
+                        TextSkip = false;
                         Attack(enemy);
                         break;
                     }
                     else if (input == "d")
                     {
+                        TextSkip = false;
                         Defend(enemy);
                         break;
                     }
                     else if (input == "r")
                     {
+                        TextSkip = false;
                         Run(enemy);
                         break;
                     }
                     else if (input == "h")
                     {
+                        TextSkip = false;
                         Heal(enemy);
                         break;
                     }
                 }
                 if (CurrentPlayer.Health <= 0)
                 {
+                    TextSkip = false;
+
                     CurrentEnemy = enemy;
 
                     Print("\nAs the " + enemy.Name + " strikes you it hits with a fatal blow!");
-                    ReadKey(true);
                     Environment.Exit(0);
                 }
             }
             int lootCoins = CurrentPlayer.CoinCalc();
-            // Add A Slime Sword Later!
+            TextSkip = false;
             Print("\nAs you stand victorious over the " + enemy.Name + ", it's body dissolves into " + lootCoins + " gold coins!");
             CurrentPlayer.Coins += lootCoins;
             CurrentPlayer.LevelCheck(enemy.XP);
             UsedPotions = 0;
-            ReadKey(true);
         }
 
         public static void Attack(Enemy enemy)
@@ -163,7 +161,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Print("You lose " + damage + " health and deal " + attack + " damage");
             CurrentPlayer.Health -= damage;
             enemy.Health -= attack;
-            ReadKey(true);
         }
 
         public static void Defend(Enemy enemy)
@@ -182,7 +179,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             }
             CurrentPlayer.Health -= damage;
             enemy.Health -= attack;
-            ReadKey(true);
         }
 
         public static void Run(Enemy enemy)
@@ -195,12 +191,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     damage = 0;
                 Print("You lose " + damage + " health and are unable to escape.");
                 CurrentPlayer.Health -= damage;
-                ReadKey(true);
             }
             else
             {
                 Print("\nYou use your crazy mobility to evade the attacks of " + enemy.Name + " and you escape!");
-                ReadKey(true);
 
                 CurrentEnemy = enemy;
                 Shop.RunShop(CurrentPlayer);
@@ -240,7 +234,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     Print("\nThe thought of drinking even one more potion sickens you.");
                 }
             }
-            ReadKey(true);
         }
     }
 }
