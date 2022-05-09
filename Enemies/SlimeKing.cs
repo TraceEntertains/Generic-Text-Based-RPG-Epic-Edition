@@ -13,6 +13,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override int CoinBonus { get; set; } = Rand.Next(100, 150);
         public override int XP { get; set; } = Rand.Next(46, 70);
         public override bool IsBoss { get; set; } = true;
+        public override int ID { get; set; } = 4;
 
         public override void StartBattle()
         {
@@ -24,14 +25,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override void PreBattle()
         {
             WriteLine("Loud thuds pounce towards your wake. Fear trembles down your spine. Then you spot it! \nKING SLIME HAS APPEARED!");
-            ReadKey();
+            ReadKey(true);
         }
 
         public override void PostBattle(bool bonusCoins = false, int coinBonus = 0)
         {
             // Text
             WriteLine("As you collect the coins, its crown dissolves into " + coinBonus + " more coins!");
-            ReadKey();
+            ReadKey(true);
             // Code
             Program.CurrentPlayer.Coins += coinBonus;
         }

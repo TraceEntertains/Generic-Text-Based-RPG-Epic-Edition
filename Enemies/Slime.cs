@@ -13,6 +13,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override int CoinBonus { get; set; } = 0;
         public override int XP { get; set; } = Rand.Next(2, 5);
         public override bool IsBoss { get; set; } = false;
+        public override int ID { get; set; } = 3;
 
         public override void StartBattle()
         {
@@ -24,7 +25,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override void PreBattle()
         {
             WriteLine("You spot a blue little blob in the distance that is hastily approaching!.");
-            ReadKey();
+            ReadKey(true);
         }
 
         public override void PostBattle(bool bonusCoins = false, int coinBonus = 0)

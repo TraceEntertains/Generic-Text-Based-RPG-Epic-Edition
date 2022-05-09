@@ -13,6 +13,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override int CoinBonus { get; set; } = 0;
         public override int XP { get; set; } = Rand.Next(1, 4);
         public override bool IsBoss { get; set; } = false;
+        public override int ID { get; set; } = 0;
 
         public override void StartBattle()
         {
@@ -25,7 +26,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         {
             Clear();
             WriteLine("You walk around the great plains and find a monster!");
-            ReadKey();
+            ReadKey(true);
         }
 
         public override void PostBattle(bool bonusCoins = false, int coinBonus = 0)

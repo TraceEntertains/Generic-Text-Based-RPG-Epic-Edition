@@ -5,12 +5,12 @@ using static System.Console;
 using static Generic_Text_Based_RPG_Epic_Edition.Program;
 using org.mariuszgromada.math.mxparser;
 using System.Data;
+using System.Text.Json.Serialization;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Encounters
     {
-        public static Enemy CurrentEnemy { get; set; }
         static Random Rand { get; set; } = new();
         static int UsedPotions = 0;
 

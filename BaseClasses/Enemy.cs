@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Generic_Text_Based_RPG_Epic_Edition.Enemies;
+using System;
 using System.Collections.Generic;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
@@ -12,6 +13,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
         public abstract int CoinBonus { get; set; }
         public abstract int XP { get; set; }
         public abstract bool IsBoss { get; set; }
+        public abstract int ID { get; set; }
 
         public static Random Rand { get; set; } = new();
 
@@ -24,6 +26,30 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
         public Enemy()
         {
             Enemies.Add(this);
+        }
+
+        public static Enemy GetByID(int id)
+        {
+            List<Enemy> EnemiesLocal = new();
+            FirstEncounter fe = new();
+            BasicEnemy be = new();
+            SkeletonArcher sa = new();
+            Slime s = new();
+            SlimeKing sk = new();
+            EnemiesLocal.Add(fe);
+            EnemiesLocal.Add(be);
+            EnemiesLocal.Add(sa);
+            EnemiesLocal.Add(s);
+            EnemiesLocal.Add(sk);
+
+            foreach (var enemy in EnemiesLocal)
+            {
+                if (enemy.ID == id)
+                {
+                    return enemy;
+                }
+            }
+            return null;
         }
     }
 }

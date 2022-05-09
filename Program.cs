@@ -10,10 +10,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 {
     internal class Program
     {
-        [JsonInclude]
         public static Player CurrentPlayer { get; set; } = new Player();
-
-        [JsonInclude]
         public static Enemy CurrentEnemy { get; set; }
 
         public static string AppDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -26,8 +23,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
             Start();
 
-            FirstEncounter firstEncounter = new();
-            firstEncounter.StartBattle();
             while (MainLoop)
             {
                 Encounters.RandomEncounter();
@@ -53,9 +48,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Clear();
                 if (File.Exists(FullPath + "\\save.json"))
                 {
-                    CurrentPlayer = SaveManager.LoadGame();
+                    SaveManager.LoadVarStorage(SaveManager.LoadGame());
                     Shop.RunShop(CurrentPlayer);
                     Clear();
+                    CurrentEnemy.StartBattle();
                 }
                 else
                 {
@@ -84,6 +80,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             ReadKey();
             Clear();
             WriteLine("You wander around in the fields till you find a creature.");
+
+            FirstEncounter firstEncounter = new();
+            firstEncounter.StartBattle();
         }
     }
 }

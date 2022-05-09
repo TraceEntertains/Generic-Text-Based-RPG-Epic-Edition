@@ -61,8 +61,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 }
                 else if (input == "q")
                 {
-                    Program.CurrentPlayer.CurrentWeaponID = Program.CurrentPlayer.CurrentWeapon.ID;
-                    SaveManager.SaveGame(Program.CurrentPlayer);
+                    SaveVarStorage saveVarStorage = new();
+
+                    SaveManager.SaveGame(saveVarStorage);
                     Environment.Exit(0);
                 }
 

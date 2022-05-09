@@ -19,10 +19,6 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         [JsonIgnore]
         public Weapon CurrentWeapon { get; set; }
 
-#nullable enable
-        public int? CurrentWeaponID { get; set; }
-#nullable disable
-
         public int ArmorValue { get; set; } = 0;
         public int Potion { get; set; } = 5;
 
