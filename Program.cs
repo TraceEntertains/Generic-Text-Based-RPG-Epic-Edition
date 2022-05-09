@@ -21,6 +21,8 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public static string AppDataFolderName { get; set; } = "\\GTBRPGEE";
         public static string FullPath { get; set; }
         public static bool MainLoop { get; set; } = true;
+
+        [STAThread]
         static void Main()
         {
             Start();

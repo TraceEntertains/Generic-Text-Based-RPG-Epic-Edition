@@ -34,9 +34,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
             // Text
             WriteLine("As you collect the coins, its crown dissolves into " + coinBonus + " more coins!");
             if (Rand.Next(0,11) == 1)
-                WriteLine("You found a legendry Slime Sword!");
-            Weapon.GetByID(2);
-            ReadKey();
+                WriteLine("You found a legendary Slime Sword!");
+            Program.CurrentPlayer.CurrentWeapon = Weapon.GetByID(2);
+            ReadKey(true);
             // Code
             Program.CurrentPlayer.Coins += coinBonus;
         }
