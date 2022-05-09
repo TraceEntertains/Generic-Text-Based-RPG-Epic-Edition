@@ -83,7 +83,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
             if (NextLevel <= 0)
             {
-                while (NextLevel < 0)
+                while (NextLevel <= 0)
                 {
                     nextLevelCalc = XP - ((5 * (Level + 1) ^ 3) / 4) - ((5 * (Level - 1) ^ 3) / 4);
 

@@ -139,13 +139,15 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     CurrentEnemy = enemy;
 
                     Print("\nAs the " + enemy.Name + " strikes you it hits with a fatal blow!");
+                    ReadKey(true);
                     Environment.Exit(0);
                 }
             }
             int lootCoins = CurrentPlayer.CoinCalc();
             TextSkip = false;
-            Print("\nAs you stand victorious over the " + enemy.Name + ", it's body dissolves into " + lootCoins + " gold coins!");
-            System.Threading.Thread.Sleep(300);
+            Print("\nAs you stand victorious over the " + enemy.Name + ", it's body disolves into " + lootCoins + " gold coins!");
+            ReadKey(true);
+            System.Threading.Thread.Sleep(2000);
             CurrentPlayer.Coins += lootCoins;
             CurrentPlayer.LevelCheck(enemy.XP);
             UsedPotions = 0;
@@ -161,6 +163,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             if (attack < 0)
                 attack = 1;
             Print("You lose " + damage + " health and deal " + attack + " damage");
+            ReadKey(true);
             CurrentPlayer.Health -= damage;
             enemy.Health -= attack;
         }
@@ -178,6 +181,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             {
                 attack = Rand.Next(3, CurrentPlayer.CurrentWeapon.Damage + CurrentPlayer.Strength + 5) - enemy.Defense;
                 Print("You get an opportunity to counterattack! The enemy takes " + attack + " damage.");
+                ReadKey(true);
             }
             CurrentPlayer.Health -= damage;
             enemy.Health -= attack;
@@ -192,11 +196,13 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 if (damage < 0)
                     damage = 0;
                 Print("You lose " + damage + " health and are unable to escape.");
+                ReadKey(true);
                 CurrentPlayer.Health -= damage;
             }
             else
             {
                 Print("\nYou use your crazy mobility to evade the attacks of " + enemy.Name + " and you escape!");
+                ReadKey(true);
 
                 CurrentEnemy = enemy;
                 Shop.RunShop(CurrentPlayer);
@@ -236,6 +242,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     Print("\nThe thought of drinking even one more potion sickens you.");
                 }
             }
+            ReadKey(true);
         }
     }
 }
