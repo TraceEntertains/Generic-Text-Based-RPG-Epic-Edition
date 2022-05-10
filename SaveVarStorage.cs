@@ -1,16 +1,17 @@
 ﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public struct SaveVarStorage
     {
-        public SavePlayer Player { get; set; }
-        public SaveEnemy Enemy { get; set; }
+        public Player Player { get; set; }
+        public Enemy Enemy { get; set; }
     }
 
-    public struct SaveEnemy
+   /*public struct SaveEnemy
     {
         public int Power { get; set; }
         public int Health { get; set; }
@@ -75,7 +76,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         }
     }
 
-    public struct SaveWeapon
+    public class SaveWeapon
     {
         public int ID { get; set; }
 
@@ -85,6 +86,19 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             sw.ID = w.ID;
 
             return sw;
+        }
+    }*/
+
+    public class ItemConverter : JsonConverter<Item>
+    {
+        public override Item Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Write(Utf8JsonWriter writer, Item item, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
         }
     }
 }

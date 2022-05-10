@@ -3,6 +3,7 @@ using org.mariuszgromada.math.mxparser;
 using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using Generic_Text_Based_RPG_Epic_Edition.Items;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
@@ -18,6 +19,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public int Defense { get; set; } = 1;
 
         public Weapon CurrentWeapon { get; set; }
+        public List<Item> Inventory { get; set; }
 
         public int ArmorValue { get; set; } = 0;
         public int Potion { get; set; } = 5;
@@ -29,7 +31,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         public int Mods { get; set; } = 0;
 
-        public static implicit operator Player(SavePlayer sp)
+       /* public static implicit operator Player(SavePlayer sp)
         {
             Player p = new();
             p.Name = sp.Name;
@@ -39,6 +41,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             p.Strength = sp.Strength;
             p.Defense = sp.Defense;
             p.CurrentWeapon = sp.CurrentWeapon;
+            p.Inventory = sp.Inventory;
             p.ArmorValue = sp.ArmorValue;
             p.Potion = sp.Potion;
             p.LastNextLevel = sp.LastNextLevel;
@@ -48,7 +51,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             p.Mods = sp.Mods;
 
             return p;
-        }
+        }*/
 
         public int GetHealth()
         {

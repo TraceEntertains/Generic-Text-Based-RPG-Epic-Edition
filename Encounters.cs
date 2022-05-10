@@ -146,9 +146,8 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             }
             int lootCoins = CurrentPlayer.CoinCalc();
             TextSkip = false;
-            Print("\nAs you stand victorious over the " + enemy.Name + ", it's body disolves into " + lootCoins + " gold coins!");
+            Print("\nAs you stand victorious over the " + enemy.Name + ", its body dissolves into " + lootCoins + " gold coins!");
             ReadKey(true);
-            System.Threading.Thread.Sleep(2000);
             CurrentPlayer.Coins += lootCoins;
             CurrentPlayer.LevelCheck(enemy.XP);
             UsedPotions = 0;

@@ -36,7 +36,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             FileStream save = File.OpenRead(Program.FullPath + "\\save.json");
 
             SaveVarStorage saveVarStorage = JsonSerializer.Deserialize<SaveVarStorage>(save);
-            SavePlayer player = saveVarStorage.Player; player.CurrentWeapon = Weapon.GetByID(saveVarStorage.Player.CurrentWeapon.ID); saveVarStorage.Player = player;
+            Player player = saveVarStorage.Player; player.CurrentWeapon = Weapon.GetByID(saveVarStorage.Player.CurrentWeapon.ID); saveVarStorage.Player = player;
 
             LoadVarStorage(saveVarStorage);
 

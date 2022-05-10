@@ -25,7 +25,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
         public abstract void StartBattle();
         public abstract void PreBattle();
 
-        public static implicit operator Enemy(SaveEnemy se)
+        /*public static implicit operator Enemy(SaveEnemy se)
         {
             Enemy e = GetByID(se.ID);
             e.Power = se.Power;
@@ -34,7 +34,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
             e.CoinBonus = se.CoinBonus;
             e.XP = se.XP;
             return e;
-        }
+        }*/
 
         public abstract void PostBattle(bool bonusCoins = false, int coinBonus = 0);
 
