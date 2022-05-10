@@ -71,7 +71,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Clear();
             }
         }
-
+        
         static void NewGame()
         {
             CurrentPlayer.CurrentWeapon = new Stick();
@@ -84,6 +84,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
             if (CurrentPlayer.Name == "")
                 WriteLine("You can't even remember your own name...");
+            else if (CurrentPlayer.Name == "Dev Mode")
+            {
+                CurrentPlayer.Health = 1000000;
+                CurrentPlayer.Coins = 1000000;
+            }
             else
                 WriteLine("You remember that your name is " + CurrentPlayer.Name + ".");
             WriteLine("(Press any key to continue)");

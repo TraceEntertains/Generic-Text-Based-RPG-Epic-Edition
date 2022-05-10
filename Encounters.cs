@@ -91,14 +91,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
             while (enemy.Health > 0)
             {
-                TextSkip = false;
+                TextSkip = true;
                 Clear();
                 Print(enemy.Name, 10);
                 Print(enemy.Power + " Attack" + " / " + enemy.Health + " Health" + " / " + enemy.Defense + " Defense", 10);
-                Print("\n=====================", 10);
-                Print("| (A)ttack (D)efend |", 10);
-                Print("|   (R)un   (H)eal  |", 10);
-                Print("=====================", 10);
+                Print("\n=====================", 0);
+                Print("| (A)ttack (D)efend |", 0);
+                Print("|   (R)un   (H)eal  |", 0);
+                Print("=====================", 0);
                 Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health + "/" + CurrentPlayer.MaxHealth, 10);
                 while (true)
                 {
@@ -135,13 +135,13 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     CurrentEnemy = enemy;
 
                     Print("\nAs the " + enemy.Name + " strikes you it hits with a fatal blow!");
-                    Print("\n (Press Enter to Exit Game)");
+                    Print("\n (Press R To Restart) \n (Press Enter to Exit Game)");
                     while (true)
-                    {
                         input = ReadKey(true).Key;
-                        if (input == ConsoleKey.Enter)
-                            Environment.Exit(0);
-                    }
+                            if (input == ConsoleKey.Enter)
+                                Environment.Exit(0); //Restart System
+
+                    
                 }
             }
             int lootCoins = CurrentPlayer.CoinCalc();
@@ -165,6 +165,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Print("You lose " + damage + " health and deal " + attack + " damage");
             while (true)
             {
+                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
@@ -185,13 +186,15 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             if (Rand.Next(1, 11) == 7)
             {
                 attack = Rand.Next(3, CurrentPlayer.CurrentWeapon.Damage + CurrentPlayer.Strength + 5) - enemy.Defense;
-                Print("You get an opportunity to counterattack! The enemy takes " + attack + " damage.");
-                while (true)
-                {
-                    input = ReadKey(true).Key;
-                    if (input == ConsoleKey.Enter)
-                        break;
-                }
+                Print("\nYou get an opportunity to counterattack! The enemy takes " + attack + " damage.");
+                
+            }
+            while (true)
+            {
+                Print("\n(Press Enter To Continue)");
+                input = ReadKey(true).Key;
+                if (input == ConsoleKey.Enter)
+                    break;
             }
             CurrentPlayer.Health -= damage;
             enemy.Health -= attack;
@@ -208,6 +211,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("You lose " + damage + " health and are unable to escape.");
                 while (true)
                 {
+                    Print("\n(Press Enter To Continue)");
                     input = ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
                         break;
@@ -219,6 +223,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("\nYou use your crazy mobility to evade the attacks of " + enemy.Name + " and you escape!");
                 while (true)
                 {
+                    Print("\n(Press Enter To Continue)");
                     input = ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
                         break;
@@ -275,6 +280,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             }
             while (true)
             {
+                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
