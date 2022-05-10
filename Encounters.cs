@@ -166,7 +166,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Print("You lose " + damage + " health and deal " + attack + " damage");
             while (true)
             {
-                Print("\n(Press Enter To Countine)");
+                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
@@ -192,7 +192,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             }
             while (true)
             {
-                Print("\n(Press Enter To Countine)");
+                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
@@ -212,7 +212,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("You lose " + damage + " health and are unable to escape.");
                 while (true)
                 {
-                    Print("\n(Press Enter To Countine)");
+                    Print("\n(Press Enter To Continue)");
                     input = ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
                         break;
@@ -224,7 +224,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("\nYou use your crazy mobility to evade the attacks of " + enemy.Name + " and you escape!");
                 while (true)
                 {
-                    Print("\n(Press Enter To Countine)");
+                    Print("\n(Press Enter To Continue)");
                     input = ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
                         break;
@@ -281,7 +281,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             }
             while (true)
             {
-                Print("\n(Press Enter To Countine)");
+                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
