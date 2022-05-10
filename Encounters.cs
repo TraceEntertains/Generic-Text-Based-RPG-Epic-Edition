@@ -96,10 +96,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Clear();
                 Print(enemy.Name, 10);
                 Print(enemy.Power + " Attack" + " / " + enemy.Health + " Health" + " / " + enemy.Defense + " Defense", 10);
-                Print("\n=====================", 5);
-                Print("| (A)ttack (D)efend |", 1);
-                Print("|   (R)un   (H)eal  |", 1);
-                Print("=====================", 1);
+                Print("\n====================");
+                Print("| (A)ttack (D)efend |");
+                Print("|   (R)un   (H)eal  |");
+                Print("=====================");
                 Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health, 10);
                 System.Threading.Thread.Sleep(SleepTime);
                 while (true)
@@ -143,7 +143,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 }
             }
             int lootCoins = CurrentPlayer.CoinCalc();
-            TextSkip = true;
+            TextSkip = false;
             Print("\nAs you stand victorious over the " + enemy.Name + ", it's body disolves into " + lootCoins + " gold coins!");
             ReadKey(true);
             System.Threading.Thread.Sleep(2000);
