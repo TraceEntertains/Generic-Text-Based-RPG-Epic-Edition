@@ -93,18 +93,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
                     NextLevel += nextLevelCalc;
                     LastNextLevel += nextLevelCalc;
-                    var math1 = (5 * (Level + 1) ^ 3) / 4;
-                    var math2 = (5 * (Level - 1) ^ 3) / 4;
-                    Console.WriteLine(LastNextLevel + " " + NextLevel + " " + XP);
-                    Console.WriteLine(nextLevelCalc + " " + (math1 + math2).ToString() + " " + math1 + " " + math2);
-                    LevelUp(nextLevelCalc);
+                    LevelUp();
                 }
                 return true;
             }
             return false;
         }
 
-        public void LevelUp(int nextLevelCalc)
+        public void LevelUp()
         {
             Console.WriteLine("You leveled up to level " + (Level + 1) + "!");
             Level += 1;
