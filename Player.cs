@@ -12,6 +12,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         public string Name { get; set; }
         public int Coins { get; set; } = 0;
+        public int MaxHealth { get; set; } = 10;
         public int Health { get; set; } = 10; // Default Health = 10
         public int Strength { get; set; } = 1; // Default Damage = 1
         public int Defense { get; set; } = 1;
@@ -21,6 +22,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public int ArmorValue { get; set; } = 0;
         public int Potion { get; set; } = 5;
 
+        public int LastNextLevel { get; set; } = 10;
         public int NextLevel { get; set; } = 10;
         public int Level { get; set; } = 1;
         public int XP { get; set; } = 0;
@@ -32,12 +34,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Player p = new();
             p.Name = sp.Name;
             p.Coins = sp.Coins;
+            p.MaxHealth = sp.MaxHealth;
             p.Health = sp.Health;
             p.Strength = sp.Strength;
             p.Defense = sp.Defense;
             p.CurrentWeapon = sp.CurrentWeapon;
             p.ArmorValue = sp.ArmorValue;
             p.Potion = sp.Potion;
+            p.LastNextLevel = sp.LastNextLevel;
             p.NextLevel = sp.NextLevel;
             p.Level = sp.Level;
             p.XP = sp.XP;
@@ -85,18 +89,22 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             {
                 while (NextLevel <= 0)
                 {
-                    nextLevelCalc = XP - ((5 * (Level + 1) ^ 3) / 4) - ((5 * (Level - 1) ^ 3) / 4);
+                    nextLevelCalc = ((5 * (Level + 1) ^ 3) / 4);
 
                     NextLevel += nextLevelCalc;
-                    Console.WriteLine(NextLevel);
-                    LevelUp();
+                    LastNextLevel += nextLevelCalc;
+                    var math1 = (5 * (Level + 1) ^ 3) / 4;
+                    var math2 = (5 * (Level - 1) ^ 3) / 4;
+                    Console.WriteLine(LastNextLevel + " " + NextLevel + " " + XP);
+                    Console.WriteLine(nextLevelCalc + " " + (math1 + math2).ToString() + " " + math1 + " " + math2);
+                    LevelUp(nextLevelCalc);
                 }
                 return true;
             }
             return false;
         }
 
-        public void LevelUp()
+        public void LevelUp(int nextLevelCalc)
         {
             Console.WriteLine("You leveled up to level " + (Level + 1) + "!");
             Level += 1;
@@ -104,8 +112,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             int temphealth = Rand.Next(2, 4);
             int temppotion = Rand.Next(3, 5);
             int tempdefense = Rand.Next(0, 2);
-            Console.WriteLine("+" + tempstrength + " Damage," + " +" + temphealth + " Health," + " +" + temppotion + " Potions," + " +" + tempdefense + " Defense");
+            Console.WriteLine("+" + tempstrength + " Damage," + " +" + temphealth + " Max Health," + " +" + temppotion + " Potions," + " +" + tempdefense + " Defense");
             Strength += tempstrength;
+            MaxHealth += temphealth;
             Health += temphealth;
             Potion += temppotion;
             Defense += tempdefense;

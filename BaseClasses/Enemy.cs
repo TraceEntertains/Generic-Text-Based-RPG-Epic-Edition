@@ -50,7 +50,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
                 var lambda = Expression.Lambda<Func<Enemy>>(expr).Compile();
                 var placeholder = lambda();
 
-                return (ID: placeholder.ID, Type: t, Creator: lambda);
+                return (placeholder.ID, Type: t, Creator: lambda);
             })
             .ToDictionary(p => p.ID, p => (p.Type, p.Creator));
         }

@@ -7,11 +7,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
     public class SlimeKing : Enemy
     {
         public override string Name { get; set; } = "Slime King";
-        public override int Power { get; set; } = Rand.Next(20, 50);
-        public override int Health { get; set; } = Rand.Next(50, 100);
-        public override int Defense { get; set; } = Rand.Next(20, 40);
+        public override int Power { get; set; } = 1;
+        public override int Health { get; set; } = 1;
+        public override int Defense { get; set; } = 1;
         public override int CoinBonus { get; set; } = Rand.Next(100, 150);
-        public override int XP { get; set; } = Rand.Next(46, 70);
+        public override int XP { get; set; } = 1000;
         public override bool IsBoss { get; set; } = true;
 
         public override int ID { get; set; } = 4;

@@ -45,9 +45,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public static void SlimeEncounter()
         {
             Clear();
-            if (Rand.Next(0,21) == 1)
+            if (true)
             {
-                if (CurrentPlayer.Level >= 20)
+                if (true)
                 {
                     SlimeKing slimeKing = new();
                     slimeKing.StartBattle();
@@ -72,12 +72,12 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             switch(Rand.Next(0,3))
             {
                 case 0:
-                    BasicEnemy basicEnemy = new();
-                    basicEnemy.StartBattle();
+                    /*BasicEnemy basicEnemy = new();
+                    basicEnemy.StartBattle();*/
                     break;
                 case 1:
-                    SkeletonArcher skeletonArcher = new();
-                    skeletonArcher.StartBattle();
+                    /*SkeletonArcher skeletonArcher = new();
+                    skeletonArcher.StartBattle();*/
                     break;
                 case 2:
                     SlimeEncounter();
@@ -101,7 +101,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("| (A)ttack (D)efend |", 10);
                 Print("|   (R)un   (H)eal  |", 10);
                 Print("=====================", 10);
-                Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health, 10);
+                Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health + "/" + CurrentPlayer.MaxHealth, 10);
                 System.Threading.Thread.Sleep(SleepTime);
                 while (true)
                 {
@@ -226,6 +226,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 {
                     Print("\nYou reach into your bag and pull out a glowing, red flask. You take a swig, you feel your body lighten up.");
                     int potionV = 5;
+                    if (potionV + CurrentPlayer.Health > CurrentPlayer.MaxHealth)
+                    {
+                        potionV = CurrentPlayer.MaxHealth - CurrentPlayer.Health;
+                    }
                     Print("You gain " + potionV + " health");
                     CurrentPlayer.Health += potionV;
                     Print("\nAs you were occupied, the " + enemy.Name + " advanced and struck.");

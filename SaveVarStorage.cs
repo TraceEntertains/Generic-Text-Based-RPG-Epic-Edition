@@ -21,7 +21,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
         public static implicit operator SaveEnemy(Enemy v)
         {
-            SaveEnemy se = new SaveEnemy();
+            SaveEnemy se = new();
             se.Power = v.Power;
             se.Health = v.Health;
             se.Defense = v.Defense;
@@ -36,6 +36,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
     {
         public string Name { get; set; }
         public int Coins { get; set; }
+        public int MaxHealth { get; set; }
         public int Health { get; set; }
         public int Strength { get; set; }
         public int Defense { get; set; }
@@ -45,6 +46,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public int ArmorValue { get; set; }
         public int Potion { get; set; }
 
+        public int LastNextLevel { get; set; }
         public int NextLevel { get; set; }
         public int Level { get; set; }
         public int XP { get; set; }
@@ -56,12 +58,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             SavePlayer sp = new();
             sp.Name = p.Name;
             sp.Coins = p.Coins;
+            sp.MaxHealth = p.MaxHealth;
             sp.Health = p.Health;
             sp.Strength = p.Strength;
             sp.Defense = p.Defense;
             sp.CurrentWeapon = p.CurrentWeapon;
             sp.ArmorValue = p.ArmorValue;
             sp.Potion = p.Potion;
+            sp.LastNextLevel = p.LastNextLevel;
             sp.NextLevel = p.NextLevel;
             sp.Level = p.Level;
             sp.XP = p.XP;
