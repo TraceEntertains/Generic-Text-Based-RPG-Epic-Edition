@@ -71,7 +71,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Clear();
             }
         }
-
+        
         static void NewGame()
         {
             CurrentPlayer.CurrentWeapon = new Stick();
