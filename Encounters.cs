@@ -15,7 +15,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         static Random Rand { get; set; } = new();
         static int UsedPotions = 0;
 
-        public static void Print(string text, int msgap = 20)
+        public static void Print(string text, int msgap = 10)
         {
             var remaining = text;
             if (TextSkip == false)
@@ -81,8 +81,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     break;
                 case 2:
                     SlimeEncounter();
-                    break;
-                // Legendary Slime Fight with if else statement small %                                                                                
+                    break;                                                                              
             }
         }
 
@@ -92,15 +91,15 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 
             while (enemy.Health > 0)
             {
-                TextSkip = false;
+                TextSkip = true;
                 System.Threading.Thread.Sleep(SleepTime);
                 Clear();
                 Print(enemy.Name, 10);
                 Print(enemy.Power + " Attack" + " / " + enemy.Health + " Health" + " / " + enemy.Defense + " Defense", 10);
-                Print("\n=====================", 10);
-                Print("| (A)ttack (D)efend |", 10);
-                Print("|   (R)un   (H)eal  |", 10);
-                Print("=====================", 10);
+                Print("\n=====================", 5);
+                Print("| (A)ttack (D)efend |", 1);
+                Print("|   (R)un   (H)eal  |", 1);
+                Print("=====================", 1);
                 Print("Potions:  " + CurrentPlayer.Potion + "  Health:  " + CurrentPlayer.Health, 10);
                 System.Threading.Thread.Sleep(SleepTime);
                 while (true)
@@ -144,7 +143,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 }
             }
             int lootCoins = CurrentPlayer.CoinCalc();
-            TextSkip = false;
+            TextSkip = true;
             Print("\nAs you stand victorious over the " + enemy.Name + ", it's body disolves into " + lootCoins + " gold coins!");
             ReadKey(true);
             System.Threading.Thread.Sleep(2000);
@@ -232,10 +231,17 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     int damage = (enemy.Power / 2) - (CurrentPlayer.ArmorValue + CurrentPlayer.Defense + Rand.Next(1, 4));
                     if (damage < 0)
                         damage = 0;
-                    Print("You lose " + damage + " health. \n\nOne Potion Consumed.");
+                    UsedPotions += 1;
+                    Print("You lose " + damage + " health.");
+                    if (UsedPotions == 1)
+                        Print("\n1/3 Potions Used.");
+                    else if (UsedPotions == 2)
+                        Print("\n2/3 Potions Used");
+                    else if (UsedPotions == 3)
+                        Print("\n3/3 Potions Used");
+                   
                     CurrentPlayer.Health -= damage;
                     CurrentPlayer.Potion--;
-                    UsedPotions += 1;
                 }
                 else
                 {
