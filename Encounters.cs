@@ -137,9 +137,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     Print("\nAs the " + enemy.Name + " strikes you it hits with a fatal blow!");
                     Print("\n (Press R To Restart) \n (Press Enter to Exit Game)");
                     while (true)
+                    {
                         input = ReadKey(true).Key;
-                            if (input == ConsoleKey.Enter)
-                                Environment.Exit(0); //Restart System
+                        if (input == ConsoleKey.Enter)
+                            Environment.Exit(0); //Restart System
+                    }
 
                     
                 }
@@ -163,9 +165,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             if (attack < 0)
                 attack = 1;
             Print("You lose " + damage + " health and deal " + attack + " damage");
+            Print("\n(Press Enter To Continue)");
             while (true)
             {
-                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
@@ -189,9 +191,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Print("\nYou get an opportunity to counterattack! The enemy takes " + attack + " damage.");
                 
             }
+            Print("\n(Press Enter To Continue)");
             while (true)
             {
-                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
@@ -209,9 +211,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 if (damage < 0)
                     damage = 0;
                 Print("You lose " + damage + " health and are unable to escape.");
+                Print("\n(Press Enter To Continue)");
                 while (true)
                 {
-                    Print("\n(Press Enter To Continue)");
                     input = ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
                         break;
@@ -221,9 +223,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             else
             {
                 Print("\nYou use your crazy mobility to evade the attacks of " + enemy.Name + " and you escape!");
+                Print("\n(Press Enter To Continue)");
                 while (true)
                 {
-                    Print("\n(Press Enter To Continue)");
                     input = ReadKey(true).Key;
                     if (input == ConsoleKey.Enter)
                         break;
@@ -278,9 +280,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     Print("\nThe thought of drinking even one more potion sickens you.");
                 }
             }
+            Print("\n(Press Enter To Continue)");
             while (true)
             {
-                Print("\n(Press Enter To Continue)");
                 input = ReadKey(true).Key;
                 if (input == ConsoleKey.Enter)
                     break;
