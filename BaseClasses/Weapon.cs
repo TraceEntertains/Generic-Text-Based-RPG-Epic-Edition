@@ -29,9 +29,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
                 var lambda = Expression.Lambda<Func<Weapon>>(expr).Compile();
                 var placeholder = lambda();
 
-                return (ID: placeholder.ID, Type: t, Creator: lambda);
+                return (placeholder.ItemID, Type: t, Creator: lambda);
             })
-            .ToDictionary(p => p.ID, p => (p.Type, p.Creator));
+            .ToDictionary(p => p.ItemID, p => (p.Type, p.Creator));
         }
 
         new public static Weapon GetByID(int id)
@@ -44,10 +44,10 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
             return null;
         }
 
-        public static implicit operator Weapon(SaveWeapon sw)
+        /*public static implicit operator Weapon(SaveWeapon sw)
         {
             Weapon w = GetByID(sw.ID);
             return w;
-        }
+        }*/
     }
 }

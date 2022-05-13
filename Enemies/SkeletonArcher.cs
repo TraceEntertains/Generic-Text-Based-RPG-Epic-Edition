@@ -1,5 +1,4 @@
 ﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
-using System;
 using static System.Console;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
@@ -13,7 +12,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override int CoinBonus { get; set; } = Rand.Next(30, 70);
         public override int XP { get; set; } = Rand.Next(3, 6);
         public override bool IsBoss { get; set; } = false;
-        public override int ID { get; set; } = 2;
+        public override int EnemyID { get; set; } = 2;
 
         public override void StartBattle()
         {

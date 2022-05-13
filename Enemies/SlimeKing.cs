@@ -1,5 +1,4 @@
 ﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
-using System;
 using static System.Console;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
@@ -14,7 +13,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         public override int XP { get; set; } = Rand.Next(46, 70);
         public override bool IsBoss { get; set; } = true;
 
-        public override int ID { get; set; } = 4;
+        public override int EnemyID { get; set; } = 4;
 
         public override void StartBattle()
         {
@@ -33,7 +32,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition.Enemies
         {
             // Text
             WriteLine("As you collect the coins, its crown dissolves into " + coinBonus + " more coins!");
-            if (Rand.Next(0,11) == 1)
+            if (Rand.Next(0, 11) == 1)
                 WriteLine("You found a legendary Slime Sword!");
             Program.CurrentPlayer.CurrentWeapon = Weapon.GetByID(2);
             ReadKey(true);

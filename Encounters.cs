@@ -1,14 +1,15 @@
-﻿using System;
-using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
+﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using Generic_Text_Based_RPG_Epic_Edition.Enemies;
-using static System.Console;
+using Microsoft.Xna.Framework.Input;
+using System;
 using static Generic_Text_Based_RPG_Epic_Edition.Program;
-using System.Windows.Input;
+using static System.Console;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class Encounters
     {
+
         public static ConsoleKey input;
         public static int SleepTime = 50;
 
@@ -26,14 +27,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     Write(c);
                     remaining = remaining.Remove(0, 1);
 
-                    System.Threading.Thread.Sleep(msgap);
-                    if (Keyboard.IsKeyDown(Key.Space) || Keyboard.IsKeyDown(Key.Enter))
+                    System.Threading.Thread.Sleep(msgap); // TODO: Fix IsKeyDown()
+                    /*if (kbs.IsKeyDown(Keys.Space)|| kbs.IsKeyDown(Keys.Enter))
                     {
                         Write(remaining);
 
                         TextSkip = true;
                         break;
-                    }
+                    }*/
                 }
             }
             else
@@ -69,7 +70,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         // Encounters Tools
         public static void RandomEncounter()
         {
-            switch(Rand.Next(0,3))
+            switch (Rand.Next(0, 3))
             {
                 case 0:
                     BasicEnemy basicEnemy = new();
@@ -81,7 +82,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     break;
                 case 2:
                     SlimeEncounter();
-                    break;                                                                              
+                    break;
             }
         }
 
@@ -143,7 +144,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                             Environment.Exit(0); //Restart System
                     }
 
-                    
+
                 }
             }
             int lootCoins = CurrentPlayer.CoinCalc();
@@ -189,7 +190,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             {
                 attack = Rand.Next(3, CurrentPlayer.CurrentWeapon.Damage + CurrentPlayer.Strength + 5) - enemy.Defense;
                 Print("\nYou get an opportunity to counterattack! The enemy takes " + attack + " damage.");
-                
+
             }
             Print("\n(Press Enter To Continue)");
             while (true)
@@ -271,7 +272,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                         Print("\n2/3 Potions Used");
                     else if (UsedPotions == 3)
                         Print("\n3/3 Potions Used");
-                   
+
                     CurrentPlayer.Health -= damage;
                     CurrentPlayer.Potion--;
                 }

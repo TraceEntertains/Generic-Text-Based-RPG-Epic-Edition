@@ -1,9 +1,9 @@
-﻿using Generic_Text_Based_RPG_Epic_Edition.Enemies;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
 {
@@ -16,10 +16,12 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
         public abstract int CoinBonus { get; set; }
         public abstract int XP { get; set; }
         public abstract bool IsBoss { get; set; }
-        public abstract int ID { get; set; }
+        public abstract int EnemyID { get; set; }
 
+        [JsonIgnore]
         public static Random Rand { get; set; } = new();
 
+        [JsonIgnore]
         public static Dictionary<int, (Type Type, Func<Enemy> Creator)> Enemies { get; set; } = new();
 
         public abstract void StartBattle();
@@ -50,9 +52,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
                 var lambda = Expression.Lambda<Func<Enemy>>(expr).Compile();
                 var placeholder = lambda();
 
-                return (placeholder.ID, Type: t, Creator: lambda);
+                return (placeholder.EnemyID, Type: t, Creator: lambda);
             })
-            .ToDictionary(p => p.ID, p => (p.Type, p.Creator));
+            .ToDictionary(p => p.EnemyID, p => (p.Type, p.Creator));
         }
 
         public static Enemy GetByID(int id)

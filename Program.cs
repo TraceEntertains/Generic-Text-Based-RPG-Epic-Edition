@@ -1,14 +1,9 @@
-﻿using System;
-using static System.Console;
+﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using Generic_Text_Based_RPG_Epic_Edition.Enemies;
-using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
-using System.IO;
 using Generic_Text_Based_RPG_Epic_Edition.Items;
-using System.Text.Json.Serialization;
-using System.Reflection;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Collections.Generic;
+using System;
+using System.IO;
+using static System.Console;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
@@ -17,12 +12,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public static Player CurrentPlayer { get; set; } = new Player();
         public static Enemy CurrentEnemy { get; set; }
 
-        public static string AppDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        public static string AppDataFolderName { get; set; } = "\\GTBRPGEE";
+        public static string AppDataDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        public static string AppDataFolderName { get; set; } = Path.DirectorySeparatorChar + "GTBRPGEE";
         public static string FullPath { get; set; }
         public static bool MainLoop { get; set; } = true;
 
-        [STAThread]
         static void Main()
         {
             Start();
@@ -54,7 +48,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             else if (input == "l")
             {
                 Clear();
-                if (File.Exists(FullPath + "\\save.json"))
+                if (File.Exists(FullPath + Path.DirectorySeparatorChar + "save.json"))
                 {
                     SaveManager.LoadVarStorage(SaveManager.LoadGame());
                     Shop.RunShop(CurrentPlayer);
@@ -71,7 +65,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 Clear();
             }
         }
-        
+
         static void NewGame()
         {
             CurrentPlayer.CurrentWeapon = new Stick();
@@ -84,11 +78,15 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
             if (CurrentPlayer.Name == "")
                 WriteLine("You can't even remember your own name...");
+#if DEBUG
             else if (CurrentPlayer.Name == "Dev Mode")
             {
                 CurrentPlayer.Health = 1000000;
                 CurrentPlayer.Coins = 1000000;
+
+                WriteLine("You remember you are a god.");
             }
+#endif
             else
                 WriteLine("You remember that your name is " + CurrentPlayer.Name + ".");
             WriteLine("(Press any key to continue)");

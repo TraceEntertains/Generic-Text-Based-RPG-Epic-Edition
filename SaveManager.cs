@@ -1,15 +1,12 @@
-﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.IO;
 using System.Text.Json;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class SaveManager
     {
+        public static JsonSerializerOptions serializeOptions = new();
+
         public static SaveVarStorage SaveVarStorage(SaveVarStorage saveVarStorage)
         {
             saveVarStorage.Player = Program.CurrentPlayer;
@@ -28,15 +25,17 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         {
             saveVarStorage = SaveVarStorage(saveVarStorage);
 
-            File.WriteAllText(Program.FullPath + "\\save.json", JsonSerializer.Serialize(saveVarStorage));
+            File.WriteAllText(Program.FullPath + Path.DirectorySeparatorChar + "save.json", JsonSerializer.Serialize(saveVarStorage));
         }
 
         public static SaveVarStorage LoadGame()
         {
-            FileStream save = File.OpenRead(Program.FullPath + "\\save.json");
+            serializeOptions.Converters.Add(new ItemConverter());
+            serializeOptions.Converters.Add(new EnemyConverter());
 
-            SaveVarStorage saveVarStorage = JsonSerializer.Deserialize<SaveVarStorage>(save);
-            Player player = saveVarStorage.Player; player.CurrentWeapon = Weapon.GetByID(saveVarStorage.Player.CurrentWeapon.ID); saveVarStorage.Player = player;
+            FileStream save = File.OpenRead(Program.FullPath + Path.DirectorySeparatorChar + "save.json");
+
+            SaveVarStorage saveVarStorage = JsonSerializer.Deserialize<SaveVarStorage>(save, serializeOptions);
 
             LoadVarStorage(saveVarStorage);
 

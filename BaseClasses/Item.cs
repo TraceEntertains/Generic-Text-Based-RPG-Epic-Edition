@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
 {
@@ -20,9 +18,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
             Weapon
         }
 
+        public abstract int ItemID { get; set; }
         public abstract ItemTypes ItemType { get; set; }
         public abstract string Name { get; set; }
-        public abstract int ID { get; set; }
 
         public static void RuntimeGetChildren()
         {
@@ -36,9 +34,9 @@ namespace Generic_Text_Based_RPG_Epic_Edition.BaseClasses
                 var lambda = Expression.Lambda<Func<Item>>(expr).Compile();
                 var placeholder = lambda();
 
-                return (ID: placeholder.ID, Type: t, Creator: lambda);
+                return (placeholder.ItemID, Type: t, Creator: lambda);
             })
-            .ToDictionary(p => p.ID, p => (p.Type, p.Creator));
+            .ToDictionary(p => p.ItemID, p => (p.Type, p.Creator));
         }
 
         public static Item GetByID(int id)

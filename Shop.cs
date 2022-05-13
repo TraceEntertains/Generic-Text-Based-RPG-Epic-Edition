@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using static System.Console;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
@@ -106,7 +105,7 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                 WriteLine("=====================");
                 WriteLine("Potions: " + player.Potion);
                 WriteLine("=====================");
-                WriteLine("Slot 1:" );
+                WriteLine("Slot 1:");
                 WriteLine("Slot 2:");
                 WriteLine("Slot 3:");
                 WriteLine("Slot 4:");
@@ -125,37 +124,37 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     break;
             }
         }
-            static void StatsScreen(Player player)
+        static void StatsScreen(Player player)
+        {
+            while (true)
             {
-                while (true)
-                {
-                    Clear();
-                    WriteLine("=====================");
-                    WriteLine("    Player Stats     ");
-                    WriteLine("=====================");
-                    WriteLine("Player Name: " + player.Name);
-                    WriteLine("Coins: " + player.Coins);
-                    WriteLine("Current Health: " + player.Health);
-                    WriteLine("Strength: " + player.Strength);
-                    WriteLine("Defense: " + player.Defense);
-                    WriteLine("=====================");
-                    WriteLine("Current Weapon: " + player.CurrentWeapon.Name);
-                    WriteLine("Weapon Strength: " + player.CurrentWeapon.Damage);
-                    WriteLine("Armor Defense: " + player.ArmorValue);
-                    WriteLine("=====================");
-                    WriteLine("Level: " + player.Level);
-                    WriteLine("XP: " + player.XP);
-                    WriteLine("Next Level: " + player.NextLevel);
-                    WriteLine("=====================");
-                    WriteLine("Difficulty Mods: " + player.Mods);
-                    WriteLine("=====================");
-                    WriteLine("        (B)ack       ");
-                    WriteLine("=====================");
+                Clear();
+                WriteLine("=====================");
+                WriteLine("    Player Stats     ");
+                WriteLine("=====================");
+                WriteLine("Player Name: " + player.Name);
+                WriteLine("Coins: " + player.Coins);
+                WriteLine("Current Health: " + player.Health);
+                WriteLine("Strength: " + player.Strength);
+                WriteLine("Defense: " + player.Defense);
+                WriteLine("=====================");
+                WriteLine("Current Weapon: " + player.CurrentWeapon.Name);
+                WriteLine("Weapon Strength: " + player.CurrentWeapon.Damage);
+                WriteLine("Armor Defense: " + player.ArmorValue);
+                WriteLine("=====================");
+                WriteLine("Level: " + player.Level);
+                WriteLine("XP: " + player.XP);
+                WriteLine("Next Level: " + player.NextLevel);
+                WriteLine("=====================");
+                WriteLine("Difficulty Mods: " + player.Mods);
+                WriteLine("=====================");
+                WriteLine("        (B)ack       ");
+                WriteLine("=====================");
 
-                    string input = ReadKey(true).Key.ToString().ToLower();
-                    if (input == "b")
-                        break;
-                }
+                string input = ReadKey(true).Key.ToString().ToLower();
+                if (input == "b")
+                    break;
             }
+        }
     }
 }

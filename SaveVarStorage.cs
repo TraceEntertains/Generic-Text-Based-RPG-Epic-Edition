@@ -1,7 +1,9 @@
 ﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using System;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static Generic_Text_Based_RPG_Epic_Edition.BaseClasses.Item;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
 {
@@ -11,92 +13,165 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         public Enemy Enemy { get; set; }
     }
 
-   /*public struct SaveEnemy
+    public static class ConverterHelpers
     {
-        public int Power { get; set; }
-        public int Health { get; set; }
-        public int Defense { get; set; }
-        public int CoinBonus { get; set; }
-        public int XP { get; set; }
-        public int ID { get; set; }
-
-        public static implicit operator SaveEnemy(Enemy v)
+        public static TPropertyType PropertySetter<TPropertyType>(ref Utf8JsonReader reader, string idType, TPropertyType deserialized) where TPropertyType : class
         {
-            SaveEnemy se = new();
-            se.Power = v.Power;
-            se.Health = v.Health;
-            se.Defense = v.Defense;
-            se.CoinBonus = v.CoinBonus;
-            se.XP = v.XP;
-            se.ID = v.ID;
-            return se;
+            string? propertyName;
+
+            propertyName = reader.GetString();
+            reader.Read();
+            PropertyInfo propertyStuff = deserialized.GetType().GetProperty(propertyName);
+            Type propertyType = propertyStuff.PropertyType;
+
+            if (propertyName != idType)
+            {
+                switch (propertyType.Name)
+                {
+                    case "String":
+#if DEBUG
+                        Console.WriteLine(propertyStuff.Name + " (" + propertyType.Name + ")" + ": " + reader.GetString());
+#endif
+                        propertyStuff.SetValue(deserialized, reader.GetString());
+                        break;
+                    case "Int32":
+                    case "ItemTypes":
+#if DEBUG
+                        Console.WriteLine(propertyStuff.Name + " (" + propertyType.Name + ")" + ": " + reader.GetInt32());
+#endif
+                        propertyStuff.SetValue(deserialized, reader.GetInt32());
+                        break;
+                    case "Boolean":
+#if DEBUG
+                        Console.WriteLine(propertyStuff.Name + " (" + propertyType.Name + ")" + ": " + reader.GetBoolean());
+#endif
+                        propertyStuff.SetValue(deserialized, reader.GetBoolean());
+                        break;
+                    case "Double":
+#if DEBUG
+                        Console.WriteLine(propertyStuff.Name + " (" + propertyType.Name + ")" + ": " + reader.GetDouble());
+#endif
+                        propertyStuff.SetValue(deserialized, reader.GetDouble());
+                        break;
+                    default:
+#if DEBUG
+                        Console.WriteLine(propertyStuff.Name + " (" + propertyType.Name + "/Unimplemented)" + ": " + reader.GetString());
+#endif
+                        break;
+                }
+            }
+
+            return deserialized;
         }
     }
-
-    public struct SavePlayer
-    {
-        public string Name { get; set; }
-        public int Coins { get; set; }
-        public int MaxHealth { get; set; }
-        public int Health { get; set; }
-        public int Strength { get; set; }
-        public int Defense { get; set; }
-
-        public SaveWeapon CurrentWeapon { get; set; }
-
-        public int ArmorValue { get; set; }
-        public int Potion { get; set; }
-
-        public int LastNextLevel { get; set; }
-        public int NextLevel { get; set; }
-        public int Level { get; set; }
-        public int XP { get; set; }
-
-        public int Mods { get; set; }
-
-        public static implicit operator SavePlayer(Player p)
-        {
-            SavePlayer sp = new();
-            sp.Name = p.Name;
-            sp.Coins = p.Coins;
-            sp.MaxHealth = p.MaxHealth;
-            sp.Health = p.Health;
-            sp.Strength = p.Strength;
-            sp.Defense = p.Defense;
-            sp.CurrentWeapon = p.CurrentWeapon;
-            sp.ArmorValue = p.ArmorValue;
-            sp.Potion = p.Potion;
-            sp.LastNextLevel = p.LastNextLevel;
-            sp.NextLevel = p.NextLevel;
-            sp.Level = p.Level;
-            sp.XP = p.XP;
-            sp.Mods = p.Mods;
-
-            return sp;
-        }
-    }
-
-    public class SaveWeapon
-    {
-        public int ID { get; set; }
-
-        public static implicit operator SaveWeapon(Weapon w)
-        {
-            SaveWeapon sw = new();
-            sw.ID = w.ID;
-
-            return sw;
-        }
-    }*/
 
     public class ItemConverter : JsonConverter<Item>
     {
+        public override bool CanConvert(Type typeToConvert) =>
+            typeof(Item).IsAssignableFrom(typeToConvert);
+
         public override Item Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            Item? deserialized;
+
+            if (reader.TokenType != JsonTokenType.StartObject)
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            string? propertyName = reader.GetString();
+            if (propertyName != "ItemID")
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            if (reader.TokenType != JsonTokenType.Number)
+            {
+                throw new JsonException();
+            }
+
+            deserialized = GetByID(reader.GetInt32());
+
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndObject || JsonTokenType.StartObject == reader.TokenType)
+                {
+                    return deserialized;
+                }
+
+                if (reader.TokenType == JsonTokenType.PropertyName)
+                {
+                   ConverterHelpers.PropertySetter(ref reader, "ItemID", deserialized);
+                }
+            }
+
+            throw new JsonException();
         }
 
         public override void Write(Utf8JsonWriter writer, Item item, JsonSerializerOptions options)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class EnemyConverter : JsonConverter<Enemy>
+    {
+        public override bool CanConvert(Type typeToConvert) =>
+            typeof(Enemy).IsAssignableFrom(typeToConvert);
+
+        public override Enemy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            Enemy? deserialized;
+
+            if (reader.TokenType != JsonTokenType.StartObject)
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            string? propertyName = reader.GetString();
+            if (propertyName != "EnemyID")
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            if (reader.TokenType != JsonTokenType.Number)
+            {
+                throw new JsonException();
+            }
+
+            deserialized = Enemy.GetByID(reader.GetInt32());
+
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndObject || JsonTokenType.StartObject == reader.TokenType)
+                {
+                    return deserialized;
+                }
+
+                if (reader.TokenType == JsonTokenType.PropertyName)
+                {
+                    ConverterHelpers.PropertySetter(ref reader, "EnemyID", deserialized);
+                }
+            }
+
+            throw new JsonException();
+        }
+
+        public override void Write(Utf8JsonWriter writer, Enemy enemy, JsonSerializerOptions options)
         {
             throw new NotImplementedException();
         }
