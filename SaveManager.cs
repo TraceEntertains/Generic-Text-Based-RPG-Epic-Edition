@@ -5,7 +5,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition
 {
     public class SaveManager
     {
-        public static JsonSerializerOptions serializeOptions = new();
+        public static JsonSerializerOptions serializeOptions = new()
+        {
+            Converters = { new ItemConverter(), new EnemyConverter() },
+            WriteIndented = true
+        };
 
         public static SaveVarStorage SaveVarStorage(SaveVarStorage saveVarStorage)
         {
@@ -25,14 +29,11 @@ namespace Generic_Text_Based_RPG_Epic_Edition
         {
             saveVarStorage = SaveVarStorage(saveVarStorage);
 
-            File.WriteAllText(Program.FullPath + Path.DirectorySeparatorChar + "save.json", JsonSerializer.Serialize(saveVarStorage));
+            File.WriteAllText(Program.FullPath + Path.DirectorySeparatorChar + "save.json", JsonSerializer.Serialize(saveVarStorage, serializeOptions));
         }
 
         public static SaveVarStorage LoadGame()
         {
-            serializeOptions.Converters.Add(new ItemConverter());
-            serializeOptions.Converters.Add(new EnemyConverter());
-
             FileStream save = File.OpenRead(Program.FullPath + Path.DirectorySeparatorChar + "save.json");
 
             SaveVarStorage saveVarStorage = JsonSerializer.Deserialize<SaveVarStorage>(save, serializeOptions);

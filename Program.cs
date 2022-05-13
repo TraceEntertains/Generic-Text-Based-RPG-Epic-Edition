@@ -3,6 +3,7 @@ using Generic_Text_Based_RPG_Epic_Edition.Enemies;
 using Generic_Text_Based_RPG_Epic_Edition.Items;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using static System.Console;
 
 namespace Generic_Text_Based_RPG_Epic_Edition
