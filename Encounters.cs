@@ -1,7 +1,7 @@
 ﻿using Generic_Text_Based_RPG_Epic_Edition.BaseClasses;
 using Generic_Text_Based_RPG_Epic_Edition.Enemies;
-using Microsoft.Xna.Framework.Input;
 using System;
+using System.Windows.Input;
 using static Generic_Text_Based_RPG_Epic_Edition.Program;
 using static System.Console;
 
@@ -27,14 +27,14 @@ namespace Generic_Text_Based_RPG_Epic_Edition
                     Write(c);
                     remaining = remaining.Remove(0, 1);
 
-                    System.Threading.Thread.Sleep(msgap); // TODO: Fix IsKeyDown()
-                    /*if (kbs.IsKeyDown(Keys.Space)|| kbs.IsKeyDown(Keys.Enter))
+                    System.Threading.Thread.Sleep(msgap);
+                    if (Keyboard.IsKeyDown(Key.Space)|| Keyboard.IsKeyDown(Key.Enter))
                     {
                         Write(remaining);
 
                         TextSkip = true;
                         break;
-                    }*/
+                    }
                 }
             }
             else

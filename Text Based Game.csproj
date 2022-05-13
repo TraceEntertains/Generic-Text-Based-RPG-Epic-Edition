@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <OutputType>Exe</OutputType>
     <PublishReadyToRun>false</PublishReadyToRun>
@@ -8,6 +8,7 @@
     <RootNamespace>Generic_Text_Based_RPG_Epic_Edition</RootNamespace>
     <AssemblyName>Generic Text-Based RPG - Epic Edition</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWPF>true</UseWPF>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup>
@@ -17,7 +18,7 @@
     <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
   <PropertyGroup>
-    <RuntimeIdentifiers>win10-x64;osx.10.12-x64;ubuntu.20.04-x64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win10-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
