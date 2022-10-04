@@ -85,7 +85,29 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             else if (Color == "blue")
                 BackgroundColor = ConsoleColor.Blue;
             else if (Color == "green")
-                BackgroundColor= ConsoleColor.Green;
+                BackgroundColor = ConsoleColor.Green;
+            else if (Color == "Cyan")
+                BackgroundColor = ConsoleColor.Cyan;
+            else if (Color == "DarkBlue")
+                BackgroundColor = ConsoleColor.DarkBlue;
+            else if (Color == "DarkGray")
+                BackgroundColor = ConsoleColor.DarkGray;
+            else if (Color == "DarkGreen")
+                BackgroundColor = ConsoleColor.DarkGreen;
+            else if (Color == "DarkMagenta")
+                BackgroundColor = ConsoleColor.DarkMagenta;
+            else if (Color == "DarkRed")
+                BackgroundColor = ConsoleColor.DarkRed;
+            else if (Color == "DarkYellow")
+                BackgroundColor = ConsoleColor.DarkYellow;
+            else if (Color == "Gray")
+                BackgroundColor = ConsoleColor.Gray;
+            else if (Color == "Magenta")
+                BackgroundColor = ConsoleColor.Magenta;
+            else if (Color == "white")
+                BackgroundColor = ConsoleColor.White;
+            else if (Color == "Yellow")
+                BackgroundColor = ConsoleColor.Yellow;
             WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
             if (CurrentPlayer.Name == "")
                 WriteLine("You can't even remember your own name...");
