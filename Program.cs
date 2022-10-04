@@ -77,6 +77,15 @@ namespace Generic_Text_Based_RPG_Epic_Edition
             Write("Name (Optional): ");
             CurrentPlayer.Name = ReadLine();
             Clear();
+            Write("Young Traveler, how do you want to see the world?\n");
+            string Color = ReadLine().ToLower();
+
+            if (Color == "red")
+                BackgroundColor = ConsoleColor.Red;
+            else if (Color == "blue")
+                BackgroundColor = ConsoleColor.Blue;
+            else if (Color == "green")
+                BackgroundColor= ConsoleColor.Green;
             WriteLine("You awake in a bright field. You're feeling dazed and having trouble remembering what happened.\n");
             if (CurrentPlayer.Name == "")
                 WriteLine("You can't even remember your own name...");
